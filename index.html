@@ -13,7 +13,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #08080c;
+            background-color: #060608;
             color: #f3f4f6;
         }
         .biker-font {
@@ -37,9 +37,17 @@
             background-size: 8px 8px;
             background-position: 0 0, 4px 4px;
         }
+        /* Pulsate effect for interactive diagram hotspots */
+        @keyframes custom-ping {
+            0% { transform: scale(1); opacity: 1; }
+            70%, 100% { transform: scale(2.4); opacity: 0; }
+        }
+        .animate-pulse-ring {
+            animation: custom-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
     </style>
 </head>
-<body class="bg-[#08080c] text-gray-200 selection:bg-orange-500 selection:text-white">
+<body class="bg-[#060608] text-gray-200 selection:bg-orange-500 selection:text-white">
 
     <!-- Top Announcement Bar -->
     <div class="bg-gradient-to-r from-orange-600 via-amber-600 to-red-600 text-white text-center py-2 px-4 text-xs font-semibold tracking-wider relative z-50 shadow-md">
@@ -62,15 +70,15 @@
 
                 <!-- Desktop Menu Options -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#showroom" onclick="scrollToSection('showroom')" class="text-sm font-semibold hover:text-orange-500 transition tracking-wide">Gear Gallery</a>
-                    <a href="#brands" onclick="scrollToSection('showroom'); setBrandFilter('all');" class="text-sm font-semibold hover:text-orange-500 transition tracking-wide">Premium Brands</a>
-                    <a href="#outpost" onclick="scrollToSection('outpost')" class="text-sm font-semibold hover:text-orange-500 transition tracking-wide">Visit Outpost</a>
-                    <a href="#about" onclick="scrollToSection('about')" class="text-sm font-semibold hover:text-orange-500 transition tracking-wide">Our Mission</a>
+                    <a href="#interactive-rider" class="text-sm font-semibold hover:text-orange-500 transition tracking-wide">Interactive Gear Guide</a>
+                    <a href="#showroom" class="text-sm font-semibold hover:text-orange-500 transition tracking-wide">Gear Categories</a>
+                    <a href="#brands" class="text-sm font-semibold hover:text-orange-500 transition tracking-wide">Premium Brands</a>
+                    <a href="#outpost" class="text-sm font-semibold hover:text-orange-500 transition tracking-wide">Visit Outpost</a>
                 </div>
 
                 <!-- Header Actions (WhatsApp Admin Direct) -->
                 <div class="flex items-center space-x-4">
-                    <a href="https://wa.me/918567967985?text=Hello%2C%20i%20want%20to%20buy%20riding%20gears" target="_blank" class="inline-flex items-center px-4 py-2.5 text-xs sm:text-sm font-extrabold text-black bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-600 hover:to-amber-500 rounded-lg shadow-[0_4px_14px_rgba(249,115,22,0.3)] hover:shadow-[0_6px_20px_rgba(249,115,22,0.5)] hover:scale-[1.03] active:scale-95 transition-all duration-200 space-x-2">
+                    <a href="https://wa.me/918567967985?text=Hello%20i%20want%20to%20buy%20riding%20gears" target="_blank" class="inline-flex items-center px-4 py-2.5 text-xs sm:text-sm font-extrabold text-black bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-600 hover:to-amber-500 rounded-lg shadow-[0_4px_14px_rgba(249,115,22,0.3)] hover:shadow-[0_6px_20px_rgba(249,115,22,0.5)] hover:scale-[1.03] active:scale-95 transition-all duration-200 space-x-2">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current" viewBox="0 0 24 24">
                             <path d="M12.031 6.172c-2.02 0-3.659 1.635-3.659 3.655 0 .615.154 1.21.443 1.74l-.47 1.722 1.765-.463c.52.28 1.106.428 1.921.428 2.02 0 3.66-1.635 3.66-3.655 0-2.02-1.64-3.627-3.66-3.627zm2.148 5.166c-.09.25-.52.485-.726.515-.205.03-.41.045-.585.045-.63 0-1.425-.33-2.025-.928-.599-.597-.93-1.393-.93-2.025 0-.175.015-.38.046-.584.03-.206.265-.636.515-.726.06-.022.12-.03.18-.03.165 0 .3.097.36.24l.345.832c.03.075.015.165-.03.225l-.21.262c-.06.075-.075.18-.03.255.225.405.54.72.945.945.075.045.18.03.255-.03l.262-.21c.06-.045.15-.06.225-.03l.832.345c.143.06.24.195.24.36 0 .06-.008.12-.03.18zM12 2C6.48 2 2 6.48 2 12c0 1.71.43 3.31 1.18 4.72L2 22l5.44-1.28c1.35.68 2.86 1.08 4.56 1.08 5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.47 0-2.84-.42-4.02-1.15l-.29-.18-2.98.7 1.15-2.82-.2-.31C4.93 15.06 4.5 13.59 4.5 12c0-4.14 3.36-7.5 7.5-7.5s7.5 3.36 7.5 7.5-3.36 7.5-7.5 7.5z"/>
                         </svg>
@@ -89,197 +97,343 @@
 
         <!-- Mobile Drawer Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-[#0a0a0e]/95 border-b border-gray-900 space-y-1 px-4 pt-2 pb-4 transition-all duration-300">
-            <a href="#showroom" onclick="scrollToSection('showroom'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-semibold text-gray-300 hover:text-orange-500 hover:bg-gray-800 transition">Gear Gallery</a>
-            <a href="#showroom" onclick="scrollToSection('showroom'); setBrandFilter('all'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-semibold text-gray-300 hover:text-orange-500 hover:bg-gray-800 transition">Brands</a>
+            <a href="#interactive-rider" onclick="scrollToSection('interactive-rider'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-semibold text-gray-300 hover:text-orange-500 hover:bg-gray-800 transition">Interactive Gear Guide</a>
+            <a href="#showroom" onclick="scrollToSection('showroom'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-semibold text-gray-300 hover:text-orange-500 hover:bg-gray-800 transition">Gear Categories</a>
+            <a href="#brands" onclick="scrollToSection('brands'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-semibold text-gray-300 hover:text-orange-500 hover:bg-gray-800 transition">Premium Brands</a>
             <a href="#outpost" onclick="scrollToSection('outpost'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-semibold text-gray-300 hover:text-orange-500 hover:bg-gray-800 transition">Visit Outpost</a>
-            <a href="#about" onclick="scrollToSection('about'); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-semibold text-gray-300 hover:text-orange-500 hover:bg-gray-800 transition">Our Mission</a>
         </div>
     </nav>
 
     <!-- High-Octane Hero Slider Section -->
-    <header id="hero" class="relative overflow-hidden bg-black text-white h-[70vh] min-h-[500px]">
-        <!-- Hero Background Slider Wrapper -->
-        <div id="hero-slider" class="relative h-full w-full transition-all duration-700 ease-in-out">
-            <!-- Slide 1 -->
-            <div class="hero-slide absolute inset-0 w-full h-full opacity-100 transition-opacity duration-1000">
+    <header id="hero" class="relative overflow-hidden bg-black text-white h-[65vh] min-h-[480px]">
+        <div class="relative h-full w-full">
+            <div class="absolute inset-0 w-full h-full">
                 <div class="absolute inset-0 bg-black/60 z-10"></div>
-                <img src="banner-1-1-1024x427.jpg" alt="Motorcycle Riders Wearing Safety Riding Gears" onerror="this.src='https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1400'" class="absolute inset-0 w-full h-full object-cover transform scale-105 transition-all duration-[8000ms] ease-out">
+                <!-- Premium Background slide -->
+                <img src="banner-1-1-1024x427.jpg" alt="Motorcycle Riders Wearing Safety Riding Gears" onerror="this.src='https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1400'" class="absolute inset-0 w-full h-full object-cover">
                 <div class="absolute inset-0 flex items-center justify-center z-20 px-4 text-center">
                     <div class="max-w-4xl space-y-6">
-                        <span class="inline-block tracking-widest text-xs font-extrabold text-orange-500 uppercase biker-font bg-orange-950/40 border border-orange-800/60 px-4 py-2 rounded-full shadow-inner animate-pulse">Live Ur Ride Store</span>
-                        <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none biker-font">ENGINEERED FOR <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">THE ROAD</span></h1>
-                        <p class="text-base sm:text-xl text-gray-300 font-light max-w-2xl mx-auto tracking-wide">Premium helmets, armor-plated jackets, luggage bags, and safety essentials. Inspect the gear and inquire for direct orders.</p>
+                        <span class="inline-block tracking-widest text-xs font-extrabold text-orange-500 uppercase biker-font bg-orange-950/40 border border-orange-800/60 px-4 py-2 rounded-full shadow-inner animate-pulse">Official LUR Web Catalog</span>
+                        <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none biker-font">SAFETY IS NOT <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">AN OPTION</span></h1>
+                        <p class="text-base sm:text-xl text-gray-300 font-light max-w-2xl mx-auto tracking-wide">We keep you secure so you can push your cruiser to its limits. Explore our category galleries of premium protective apparel and luggage bags below.</p>
                         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                            <button onclick="scrollToSection('showroom')" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-black hover:from-orange-600 hover:to-amber-600 font-black rounded-lg shadow-xl tracking-wider transition hover:scale-105 active:scale-95 text-sm uppercase">Explore Showroom</button>
-                            <button onclick="scrollToSection('outpost')" class="w-full sm:w-auto px-8 py-4 bg-gray-900 border border-gray-700 text-white hover:bg-gray-800 hover:border-gray-500 font-bold rounded-lg transition hover:scale-105 text-sm uppercase">Find Our Store</button>
+                            <button onclick="scrollToSection('interactive-rider')" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-black hover:from-orange-600 hover:to-amber-600 font-black rounded-lg shadow-xl tracking-wider transition hover:scale-105 active:scale-95 text-sm uppercase">Interactive Gear Guide</button>
+                            <button onclick="scrollToSection('showroom')" class="w-full sm:w-auto px-8 py-4 bg-gray-900 border border-gray-700 text-white hover:bg-gray-800 hover:border-gray-500 font-bold rounded-lg transition hover:scale-105 text-sm uppercase">Browse Categories</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Slide 2 -->
-            <div class="hero-slide absolute inset-0 w-full h-full opacity-0 transition-opacity duration-1000">
-                <div class="absolute inset-0 bg-black/70 z-10"></div>
-                <img src="image_71c979.jpg" alt="Riders wearing Solace Jackets" onerror="this.src='https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?auto=format&fit=crop&q=80&w=1400'" class="absolute inset-0 w-full h-full object-cover">
-                <div class="absolute inset-0 flex items-center justify-center z-20 px-4 text-center">
-                    <div class="max-w-4xl space-y-6">
-                        <span class="inline-block tracking-widest text-xs font-extrabold text-amber-400 uppercase biker-font bg-amber-950/40 border border-amber-800/60 px-4 py-2 rounded-full">Premium Jackets & Gear</span>
-                        <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-none biker-font">SOLACE ARMOR <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-500">SHOWCASE</span></h2>
-                        <p class="text-base sm:text-lg text-gray-300 font-light max-w-xl mx-auto">Equipped with CE Level 2 protectors for unbeatable safety and exceptional high-speed aerodynamics.</p>
-                        <div class="pt-4">
-                            <button onclick="scrollToSection('showroom'); setCategoryFilter('JACKETS');" class="px-8 py-4 bg-gradient-to-r from-amber-400 to-orange-500 text-black hover:from-amber-500 hover:to-orange-600 font-black rounded-lg shadow-xl tracking-wider transition hover:scale-105 text-sm uppercase">Browse Jackets</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Hero Navigation Arrows -->
-        <button onclick="changeHeroSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-orange-500/80 p-3 rounded-full text-white transition hover:scale-110 active:scale-95">
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-        </button>
-        <button onclick="changeHeroSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-orange-500/80 p-3 rounded-full text-white transition hover:scale-110 active:scale-95">
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-        </button>
-
-        <!-- Slide Indicators -->
-        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex space-x-3">
-            <span onclick="setHeroSlide(0)" class="slide-dot h-2 w-10 rounded-full cursor-pointer transition bg-orange-500"></span>
-            <span onclick="setHeroSlide(1)" class="slide-dot h-2 w-10 rounded-full cursor-pointer transition bg-gray-600"></span>
         </div>
     </header>
 
-    <!-- Showcase Gallery Section -->
-    <section id="showroom" class="py-16 bg-[#08080c] relative z-20 bg-carbon">
+    <!-- INTERACTIVE MOTORCYCLE RIDER GEAR GUIDE SECTION -->
+    <section id="interactive-rider" class="py-20 bg-gradient-to-b from-stone-950 to-[#0c0c10] border-t border-gray-900 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center space-y-4 mb-12">
-                <h2 class="text-3xl font-black tracking-tight biker-font text-white">GEAR <span class="text-orange-500">GALLERY</span></h2>
-                <p class="text-gray-400 max-w-xl mx-auto text-sm">Select a category below to browse our visual catalog. No carts, no pricing – just high-performance ride protection.</p>
+                <span class="text-xs font-extrabold tracking-widest text-orange-500 uppercase biker-font">Equipped for Adventure</span>
+                <h2 class="text-3xl sm:text-4xl font-black tracking-tight biker-font text-white">THE ULTIMATE <span class="text-orange-500">CRUISER JOURNEY</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">We design and curate professional safety solutions for epic cruiser road trips. Explore the responsive landscape diagram below: click or hover over any pulsating node to inspect safety apparel & tour luggage details.</p>
                 <div class="h-1 w-20 bg-gradient-to-r from-orange-500 to-amber-500 mx-auto rounded-full"></div>
             </div>
 
-            <!-- Category Filter Tabs -->
-            <div class="flex flex-wrap justify-center gap-2 mb-10 pb-4 border-b border-gray-900">
-                <button onclick="setCategoryFilter('all')" id="tab-all" class="category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-orange-500/20 bg-orange-500/10 text-orange-400 hover:border-orange-500">
-                    All Gear
-                </button>
-                <button onclick="setCategoryFilter('HELMETS')" id="tab-HELMETS" class="category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700 bg-gray-950/50">
-                    Helmets
-                </button>
-                <button onclick="setCategoryFilter('JACKETS')" id="tab-JACKETS" class="category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700 bg-gray-950/50">
-                    Jackets
-                </button>
-                <button onclick="setCategoryFilter('BOOTS')" id="tab-BOOTS" class="category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700 bg-gray-950/50">
-                    Boots
-                </button>
-                <button onclick="setCategoryFilter('GLOVES')" id="tab-GLOVES" class="category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700 bg-gray-950/50">
-                    Gloves
-                </button>
-                <button onclick="setCategoryFilter('PANTS')" id="tab-PANTS" class="category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700 bg-gray-950/50">
-                    Pants
-                </button>
-                <button onclick="setCategoryFilter('LUGGAGE')" id="tab-LUGGAGE" class="category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700 bg-gray-950/50">
-                    Luggage
-                </button>
-                <button onclick="setCategoryFilter('ACCESSORIES')" id="tab-ACCESSORIES" class="category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700 bg-gray-950/50">
-                    Accessories
-                </button>
-            </div>
+            <!-- Interactive Hotspot Frame -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#0d0d12] p-6 rounded-2xl border border-gray-900 shadow-2xl">
+                <!-- Left: Hotspot Diagram Area -->
+                <div class="lg:col-span-8 relative rounded-xl overflow-hidden shadow-inner bg-black border border-gray-800 group">
+                    <img src="image_7176c8.png" alt="Motorcycle Cruiser Rider on a Mountain Trip" onerror="this.src='https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1400'" class="w-full h-auto object-cover opacity-80 transition duration-700">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40"></div>
 
-            <!-- Search and Brand Filter Utility Row -->
-            <div class="bg-[#0f0f15]/90 border border-gray-900 rounded-2xl p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-orange-400">Filter Utility</span>
-                    <h3 id="gallery-counter-label" class="text-sm font-black text-white uppercase tracking-wider block mt-1">Showing all products</h3>
+                    <!-- PULSATING HOTSPOTS (Positioned on the Cruiser Rider based on coordinate overlay) -->
+                    
+                    <!-- 1. HELMET (Targeting head area) -->
+                    <div class="absolute top-[28%] left-[24%] md:top-[26%] md:left-[24%] z-30 group" onclick="focusHotspot('helmet', 'HELMETS')">
+                        <span class="absolute inline-flex h-6 w-6 rounded-full bg-orange-500 opacity-75 animate-pulse-ring"></span>
+                        <button class="relative flex items-center justify-center w-6 h-6 rounded-full bg-orange-500 border border-white text-[10px] font-bold text-black shadow-lg">1</button>
+                    </div>
+
+                    <!-- 2. JACKET (Targeting body center) -->
+                    <div class="absolute top-[48%] left-[23%] md:top-[44%] md:left-[23%] z-30 group" onclick="focusHotspot('jacket', 'JACKETS')">
+                        <span class="absolute inline-flex h-6 w-6 rounded-full bg-orange-500 opacity-75 animate-pulse-ring"></span>
+                        <button class="relative flex items-center justify-center w-6 h-6 rounded-full bg-orange-500 border border-white text-[10px] font-bold text-black shadow-lg">2</button>
+                    </div>
+
+                    <!-- 3. GLOVES (Targeting handlebar / hand area) -->
+                    <div class="absolute top-[52%] left-[43%] md:top-[48%] md:left-[43%] z-30 group" onclick="focusHotspot('gloves', 'GLOVES')">
+                        <span class="absolute inline-flex h-6 w-6 rounded-full bg-orange-500 opacity-75 animate-pulse-ring"></span>
+                        <button class="relative flex items-center justify-center w-6 h-6 rounded-full bg-orange-500 border border-white text-[10px] font-bold text-black shadow-lg">3</button>
+                    </div>
+
+                    <!-- 4. PANTS (Targeting leg area) -->
+                    <div class="absolute top-[72%] left-[26%] md:top-[68%] md:left-[26%] z-30 group" onclick="focusHotspot('pants', 'PANTS')">
+                        <span class="absolute inline-flex h-6 w-6 rounded-full bg-orange-500 opacity-75 animate-pulse-ring"></span>
+                        <button class="relative flex items-center justify-center w-6 h-6 rounded-full bg-orange-500 border border-white text-[10px] font-bold text-black shadow-lg">4</button>
+                    </div>
+
+                    <!-- 5. BOOTS (Targeting foot / peg area) -->
+                    <div class="absolute top-[85%] left-[30%] md:top-[82%] md:left-[30%] z-30 group" onclick="focusHotspot('boots', 'BOOTS')">
+                        <span class="absolute inline-flex h-6 w-6 rounded-full bg-orange-500 opacity-75 animate-pulse-ring"></span>
+                        <button class="relative flex items-center justify-center w-6 h-6 rounded-full bg-orange-500 border border-white text-[10px] font-bold text-black shadow-lg">5</button>
+                    </div>
+
+                    <!-- 6. LUGGAGE - REAR BAG (Targeting rear carrier mount) -->
+                    <div class="absolute top-[68%] left-[10%] md:top-[64%] md:left-[10%] z-30 group" onclick="focusHotspot('luggage', 'LUGGAGE')">
+                        <span class="absolute inline-flex h-6 w-6 rounded-full bg-orange-500 opacity-75 animate-pulse-ring"></span>
+                        <button class="relative flex items-center justify-center w-6 h-6 rounded-full bg-orange-500 border border-white text-[10px] font-bold text-black shadow-lg">6</button>
+                    </div>
+
+                    <!-- Interactive Guide Legend On Image overlay -->
+                    <div class="absolute bottom-4 left-4 bg-black/90 backdrop-blur-md px-4 py-2 border border-gray-800 rounded-lg text-xs hidden sm:block">
+                        <span class="font-bold text-orange-400 block mb-1">Mountain Cruiser Outfit</span>
+                        <p class="text-gray-400">Click any numbered node to reveal technical specs & store catalog inquiries</p>
+                    </div>
                 </div>
 
-                <!-- Custom Live Search -->
-                <div class="relative w-full md:w-80">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
-                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </span>
-                    <input type="text" id="gallery-search" oninput="handleSearch(this.value)" placeholder="Search by name, brand, model..." class="w-full bg-black border border-gray-800 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 rounded-xl pl-9 pr-4 py-2 text-sm text-gray-300 placeholder-gray-500 outline-none transition">
+                <!-- Right: Interactive Info Display Panel -->
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="bg-gradient-to-b from-gray-950 to-black p-6 rounded-xl border border-gray-800" id="hotspot-info-box">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-[10px] tracking-widest text-orange-500 font-extrabold uppercase biker-font">Interactive Spec</span>
+                            <span class="px-2 py-0.5 bg-orange-500/10 text-orange-400 rounded text-[10px] font-black uppercase">Active Highlight</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white uppercase mb-2" id="hotspot-title">1. Full Face Protection</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed mb-4" id="hotspot-desc">Aerodynamic shell engineered to safeguard cruiser riders during highway tours. Multi-density composite layer absorbs impact securely.</p>
+                        
+                        <div class="bg-[#0f0f15] rounded-lg p-3.5 border border-gray-900 space-y-2 mb-6 text-xs text-gray-400">
+                            <span class="font-extrabold text-white block uppercase">Core Safety Standards:</span>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-orange-500">✓</span>
+                                <span id="hotspot-spec-1">ECE 22.06 & DOT Certified Shell</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-orange-500">✓</span>
+                                <span id="hotspot-spec-2">Anti-Fog Pinlock-Ready Optic Lens</span>
+                            </div>
+                        </div>
+
+                        <a href="https://wa.me/918567967985?text=Hello%20LIVE%20UR%20RIDE%2C%20I%20want%20to%20buy%20premium%20Helmets%20safety%20gear." target="_blank" id="hotspot-wa-btn" class="w-full text-center py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-black font-extrabold rounded-lg hover:scale-105 active:scale-95 transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                            <span>Inquire Category Catalog</span>
+                            <span>➔</span>
+                        </a>
+                    </div>
+
+                    <!-- Direct Quick Selection tabs for mobile / small screen fallback -->
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="focusHotspot('helmet', 'HELMETS')" class="py-2.5 px-1 bg-gray-900 hover:bg-orange-500/20 hover:text-orange-400 border border-gray-800 rounded text-[10px] font-bold uppercase tracking-wider transition">1. Helmet</button>
+                        <button onclick="focusHotspot('jacket', 'JACKETS')" class="py-2.5 px-1 bg-gray-900 hover:bg-orange-500/20 hover:text-orange-400 border border-gray-800 rounded text-[10px] font-bold uppercase tracking-wider transition">2. Jacket</button>
+                        <button onclick="focusHotspot('gloves', 'GLOVES')" class="py-2.5 px-1 bg-gray-900 hover:bg-orange-500/20 hover:text-orange-400 border border-gray-800 rounded text-[10px] font-bold uppercase tracking-wider transition">3. Gloves</button>
+                        <button onclick="focusHotspot('pants', 'PANTS')" class="py-2.5 px-1 bg-gray-900 hover:bg-orange-500/20 hover:text-orange-400 border border-gray-800 rounded text-[10px] font-bold uppercase tracking-wider transition">4. Pants</button>
+                        <button onclick="focusHotspot('boots', 'BOOTS')" class="py-2.5 px-1 bg-gray-900 hover:bg-orange-500/20 hover:text-orange-400 border border-gray-800 rounded text-[10px] font-bold uppercase tracking-wider transition">5. Boots</button>
+                        <button onclick="focusHotspot('luggage', 'LUGGAGE')" class="py-2.5 px-1 bg-gray-900 hover:bg-orange-500/20 hover:text-orange-400 border border-gray-800 rounded text-[10px] font-bold uppercase tracking-wider transition">6. Luggage</button>
+                    </div>
                 </div>
-
-                <!-- Direct Brand Selector -->
-                <div class="flex items-center gap-2 w-full md:w-auto">
-                    <span class="text-xs text-gray-400 whitespace-nowrap">Brand:</span>
-                    <select id="gallery-brand" onchange="handleBrandSelection(this.value)" class="w-full md:w-48 bg-black border border-gray-800 rounded-xl px-3 py-2 text-xs font-bold text-gray-300 outline-none focus:border-orange-500 transition cursor-pointer">
-                        <option value="all">All Premium Brands</option>
-                        <option value="Ls2">Ls2</option>
-                        <option value="SOLACE">Solace</option>
-                        <option value="VIATERRA">Viaterra</option>
-                        <option value="AXOR">Axor</option>
-                        <option value="SMK">SMK</option>
-                        <option value="Guardian Gears">Guardian Gears</option>
-                        <option value="ORAZO">Orazo</option>
-                        <option value="Bobo">Bobo</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Core Interactive Product Grid -->
-            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Dynamic grid elements will inject here -->
-            </div>
-
-            <!-- Empty Showroom Fallback State -->
-            <div id="no-products-fallback" class="hidden text-center py-16 bg-gray-950/40 border border-gray-900 rounded-2xl">
-                <span class="text-5xl block mb-4">🛡️</span>
-                <h4 class="text-lg font-bold text-white mb-2">No Match in our Warehouse</h4>
-                <p class="text-sm text-gray-400 max-w-sm mx-auto mb-6">We couldn't find matching items under the specified query. Try adjusting your parameters.</p>
-                <button onclick="resetFilters()" class="px-5 py-2.5 bg-orange-500 text-black font-extrabold rounded-lg hover:bg-orange-600 transition">Reset Filters</button>
             </div>
         </div>
     </section>
 
-    <!-- Brand Philosophy Mission Section -->
-    <section id="about" class="py-20 bg-gradient-to-r from-stone-950 via-[#0a0a0f] to-stone-950 border-t border-b border-gray-900 relative overflow-hidden">
+    <!-- GALLERY CATEGORIES (ONE IMMERSIVE CARD FOR EVERY CATEGORY) -->
+    <section id="showroom" class="py-20 bg-black relative bg-carbon">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-xs font-extrabold tracking-widest text-orange-500 uppercase biker-font">Our Showroom Segments</span>
+                <h2 class="text-3xl font-black tracking-tight biker-font text-white">SAFETY & STYLE <span class="text-orange-500">CATEGORIES</span></h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm">We don't just sell products; we offer professional, certified life-saving armor configurations from top brands.</p>
+                <div class="h-1 w-20 bg-gradient-to-r from-orange-500 to-amber-500 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Core Interactive Category Grid (Cliparts representation) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                
+                <!-- Category 1: HELMETS -->
+                <div class="group bg-[#0d0d12] border border-gray-950 hover:border-orange-500/30 rounded-2xl overflow-hidden p-6 shadow-xl transition-all duration-300 hover:shadow-[0_4px_30px_rgba(249,115,22,0.12)] hover:-translate-y-1.5 flex flex-col justify-between">
+                    <div>
+                        <!-- Clipart Frame -->
+                        <div class="aspect-square bg-zinc-950 rounded-xl flex items-center justify-center mb-6 border border-gray-900 group-hover:bg-orange-500/5 transition duration-300 relative">
+                            <!-- Premium Clipart SVG for Helmets -->
+                            <svg class="h-28 w-28 text-orange-500 group-hover:scale-110 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2a10 10 0 00-10 10c0 4.135 2.512 7.693 6.124 9.172l1.376-1.376a2 2 0 011.414-.586h2.172a2 2 0 011.414.586l1.376 1.376c3.612-1.479 6.124-5.037 6.124-9.172a10 10 0 00-10-10z" />
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15a4.5 4.5 0 01-4-2" />
+                            </svg>
+                            <span class="absolute top-3 left-3 bg-orange-500/10 text-orange-400 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded">ECE 22.06 Specs</span>
+                        </div>
+                        <h3 class="text-white biker-font font-black tracking-wide text-md uppercase mb-2">1. HELMETS</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">ECE, DOT, and ISI certified double-visor aerodynamics. Perfect fit safety foam padding to protect riders on high speed tracks.</p>
+                    </div>
+                    <a href="https://wa.me/918567967985?text=Hello%20LIVE%20UR%20RIDE%2C%20I%20want%20to%20inquire%20about%20the%20Premium%20HELMETS%20catalog." target="_blank" class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-black text-xs font-black rounded-lg text-center uppercase tracking-wider transition block">Inquire Category ➔</a>
+                </div>
+
+                <!-- Category 2: JACKETS -->
+                <div class="group bg-[#0d0d12] border border-gray-950 hover:border-orange-500/30 rounded-2xl overflow-hidden p-6 shadow-xl transition-all duration-300 hover:shadow-[0_4px_30px_rgba(249,115,22,0.12)] hover:-translate-y-1.5 flex flex-col justify-between">
+                    <div>
+                        <!-- Clipart Frame -->
+                        <div class="aspect-square bg-zinc-950 rounded-xl flex items-center justify-center mb-6 border border-gray-900 group-hover:bg-orange-500/5 transition duration-300 relative">
+                            <!-- Premium Clipart SVG for Jackets -->
+                            <svg class="h-28 w-28 text-orange-500 group-hover:scale-110 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 4h4v14h-4zM4 4h4v14H4zM8 4h8l1 6H7z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16M9 20h6" />
+                            </svg>
+                            <span class="absolute top-3 left-3 bg-orange-500/10 text-orange-400 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded">Level 2 Armor</span>
+                        </div>
+                        <h3 class="text-white biker-font font-black tracking-wide text-md uppercase mb-2">2. JACKETS</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Heavy-duty mesh panels with pre-equipped CE Level 2 protective armor pads on shoulders, elbows, and spine.</p>
+                    </div>
+                    <a href="https://wa.me/918567967985?text=Hello%20LIVE%20UR%20RIDE%2C%20I%20want%20to%20inquire%20about%20the%20Premium%20JACKETS%20catalog." target="_blank" class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-black text-xs font-black rounded-lg text-center uppercase tracking-wider transition block">Inquire Category ➔</a>
+                </div>
+
+                <!-- Category 3: BOOTS -->
+                <div class="group bg-[#0d0d12] border border-gray-950 hover:border-orange-500/30 rounded-2xl overflow-hidden p-6 shadow-xl transition-all duration-300 hover:shadow-[0_4px_30px_rgba(249,115,22,0.12)] hover:-translate-y-1.5 flex flex-col justify-between">
+                    <div>
+                        <!-- Clipart Frame -->
+                        <div class="aspect-square bg-zinc-950 rounded-xl flex items-center justify-center mb-6 border border-gray-900 group-hover:bg-orange-500/5 transition duration-300 relative">
+                            <!-- Premium Clipart SVG for Boots -->
+                            <svg class="h-28 w-28 text-orange-500 group-hover:scale-110 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 12h-4c-1.1 0-2 .9-2 2v2H7V8c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v4z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 19H7a1 1 0 01-1-1v-2h12v2a1 1 0 01-1 1z" />
+                            </svg>
+                            <span class="absolute top-3 left-3 bg-orange-500/10 text-orange-400 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded">Ankle Guard</span>
+                        </div>
+                        <h3 class="text-white biker-font font-black tracking-wide text-md uppercase mb-2">3. BOOTS</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Protective steel-shank heavy duty footwear. Engineered with customized ankle bone safety pads and anti-skid cruiser grips.</p>
+                    </div>
+                    <a href="https://wa.me/918567967985?text=Hello%20LIVE%20UR%20RIDE%2C%20I%20want%20to%20inquire%20about%20the%20Premium%20BOOTS%20catalog." target="_blank" class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-black text-xs font-black rounded-lg text-center uppercase tracking-wider transition block">Inquire Category ➔</a>
+                </div>
+
+                <!-- Category 4: GLOVES -->
+                <div class="group bg-[#0d0d12] border border-gray-950 hover:border-orange-500/30 rounded-2xl overflow-hidden p-6 shadow-xl transition-all duration-300 hover:shadow-[0_4px_30px_rgba(249,115,22,0.12)] hover:-translate-y-1.5 flex flex-col justify-between">
+                    <div>
+                        <!-- Clipart Frame -->
+                        <div class="aspect-square bg-zinc-950 rounded-xl flex items-center justify-center mb-6 border border-gray-900 group-hover:bg-orange-500/5 transition duration-300 relative">
+                            <!-- Premium Clipart SVG for Gloves -->
+                            <svg class="h-28 w-28 text-orange-500 group-hover:scale-110 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 10V4a2 2 0 114 0v6M5 11v-4a2 2 0 114 0v4M13 10V6a2 2 0 114 0v4M17 12V8a2 2 0 114 0v4M5 11h16v6a2 2 0 01-2 2H7a2 2 0 01-2-2v-6z" />
+                            </svg>
+                            <span class="absolute top-3 left-3 bg-orange-500/10 text-orange-400 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded">Carbon Knuckles</span>
+                        </div>
+                        <h3 class="text-white biker-font font-black tracking-wide text-md uppercase mb-2">4. GLOVES</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Carbon-composite visual knuckle guard gloves with active air mesh ventilation and smartphone direct touch pads.</p>
+                    </div>
+                    <a href="https://wa.me/918567967985?text=Hello%20LIVE%20UR%20RIDE%2C%20I%20want%20to%20inquire%20about%20the%20Premium%20GLOVES%20catalog." target="_blank" class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-black text-xs font-black rounded-lg text-center uppercase tracking-wider transition block">Inquire Category ➔</a>
+                </div>
+
+                <!-- Category 5: PANTS -->
+                <div class="group bg-[#0d0d12] border border-gray-950 hover:border-orange-500/30 rounded-2xl overflow-hidden p-6 shadow-xl transition-all duration-300 hover:shadow-[0_4px_30px_rgba(249,115,22,0.12)] hover:-translate-y-1.5 flex flex-col justify-between">
+                    <div>
+                        <!-- Clipart Frame -->
+                        <div class="aspect-square bg-zinc-950 rounded-xl flex items-center justify-center mb-6 border border-gray-900 group-hover:bg-orange-500/5 transition duration-300 relative">
+                            <!-- Premium Clipart SVG for Pants -->
+                            <svg class="h-28 w-28 text-orange-500 group-hover:scale-110 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 4h10l1 12H6z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 16h4v4H6zm8 0h4v4h-4z" />
+                            </svg>
+                            <span class="absolute top-3 left-3 bg-orange-500/10 text-orange-400 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded">Knee Slider</span>
+                        </div>
+                        <h3 class="text-white biker-font font-black tracking-wide text-md uppercase mb-2">5. PANTS</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">CE level 2 protection knee armors. Ripstop waterproof textile fabrics to guarantee dry cruiser rides over high mountain terrain.</p>
+                    </div>
+                    <a href="https://wa.me/918567967985?text=Hello%20LIVE%20UR%20RIDE%2C%20I%20want%20to%20inquire%20about%20the%20Premium%20PANTS%20catalog." target="_blank" class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-black text-xs font-black rounded-lg text-center uppercase tracking-wider transition block">Inquire Category ➔</a>
+                </div>
+
+                <!-- Category 6: LUGGAGE -->
+                <div class="group bg-[#0d0d12] border border-gray-950 hover:border-orange-500/30 rounded-2xl overflow-hidden p-6 shadow-xl transition-all duration-300 hover:shadow-[0_4px_30px_rgba(249,115,22,0.12)] hover:-translate-y-1.5 flex flex-col justify-between">
+                    <div>
+                        <!-- Clipart Frame -->
+                        <div class="aspect-square bg-zinc-950 rounded-xl flex items-center justify-center mb-6 border border-gray-900 group-hover:bg-orange-500/5 transition duration-300 relative">
+                            <!-- Premium Clipart SVG for Luggage -->
+                            <svg class="h-28 w-28 text-orange-500 group-hover:scale-110 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6V4h6v2M7 10h10M7 14h10" />
+                            </svg>
+                            <span class="absolute top-3 left-3 bg-orange-500/10 text-orange-400 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded">Waterproof</span>
+                        </div>
+                        <h3 class="text-white biker-font font-black tracking-wide text-md uppercase mb-2">6. LUGGAGE</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Touring saddlebags, extreme tail bags, and fast-grip magnetic tank bags optimized for secure cruiser mounting.</p>
+                    </div>
+                    <a href="https://wa.me/918567967985?text=Hello%20LIVE%20UR%20RIDE%2C%20I%20want%20to%20inquire%20about%20the%20Premium%20LUGGAGE%20catalog." target="_blank" class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-black text-xs font-black rounded-lg text-center uppercase tracking-wider transition block">Inquire Category ➔</a>
+                </div>
+
+                <!-- Category 7: ACCESSORIES -->
+                <div class="group bg-[#0d0d12] border border-gray-950 hover:border-orange-500/30 rounded-2xl overflow-hidden p-6 shadow-xl transition-all duration-300 hover:shadow-[0_4px_30px_rgba(249,115,22,0.12)] hover:-translate-y-1.5 flex flex-col justify-between">
+                    <div>
+                        <!-- Clipart Frame -->
+                        <div class="aspect-square bg-zinc-950 rounded-xl flex items-center justify-center mb-6 border border-gray-900 group-hover:bg-orange-500/5 transition duration-300 relative">
+                            <!-- Premium Clipart SVG for Accessories -->
+                            <svg class="h-28 w-28 text-orange-500 group-hover:scale-110 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4V4" />
+                            </svg>
+                            <span class="absolute top-3 left-3 bg-orange-500/10 text-orange-400 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded">Essentials</span>
+                        </div>
+                        <h3 class="text-white biker-font font-black tracking-wide text-md uppercase mb-2">7. ACCESSORIES</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">Jaw-grip navigation mobile mounts, premium anti-sweat balaclavas, active helmet cleaner foam sprays, and anti-fog visors.</p>
+                    </div>
+                    <a href="https://wa.me/918567967985?text=Hello%20LIVE%20UR%20RIDE%2C%20I%20want%20to%20inquire%20about%20the%20Premium%20ACCESSORIES%20catalog." target="_blank" class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-black text-xs font-black rounded-lg text-center uppercase tracking-wider transition block">Inquire Category ➔</a>
+                </div>
+
+                <!-- Category 8: PROTECTORS -->
+                <div class="group bg-[#0d0d12] border border-gray-950 hover:border-orange-500/30 rounded-2xl overflow-hidden p-6 shadow-xl transition-all duration-300 hover:shadow-[0_4px_30px_rgba(249,115,22,0.12)] hover:-translate-y-1.5 flex flex-col justify-between">
+                    <div>
+                        <!-- Clipart Frame -->
+                        <div class="aspect-square bg-zinc-950 rounded-xl flex items-center justify-center mb-6 border border-gray-900 group-hover:bg-orange-500/5 transition duration-300 relative">
+                            <!-- Premium Clipart SVG for Protectors -->
+                            <svg class="h-28 w-28 text-orange-500 group-hover:scale-110 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                            <span class="absolute top-3 left-3 bg-orange-500/10 text-orange-400 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded">Impact Shells</span>
+                        </div>
+                        <h3 class="text-white biker-font font-black tracking-wide text-md uppercase mb-2">8. PROTECTORS</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">CE Level 2 armor inserts, chest guards, high-density tailbone shields, and bionic spine protectors for tracks and trails.</p>
+                    </div>
+                    <a href="https://wa.me/918567967985?text=Hello%20LIVE%20UR%20RIDE%2C%20I%20want%20to%20inquire%20about%20the%20Premium%20PROTECTORS%20catalog." target="_blank" class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-black text-xs font-black rounded-lg text-center uppercase tracking-wider transition block">Inquire Category ➔</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Philosophy Mission & Premium Brands Section -->
+    <section id="brands" class="py-20 bg-[#0a0a0f] border-t border-b border-gray-900 relative overflow-hidden">
         <div class="absolute inset-0 bg-orange-500/5 bg-carbon opacity-60"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-orange-500/20 text-orange-400 border border-orange-500/30 rounded-full text-xs font-black uppercase tracking-wider">
-                        <span>LUR Philosophy</span>
-                    </div>
-                    <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white biker-font">NEVER COMPROMISE ON <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">YOUR PROTECTION</span></h3>
-                    <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
-                        Riding gear is not an accessory, it's a lifecycle insurance. **LIVE UR RIDE** provides high-octane gear sourced from elite manufacturers. From high-integrity composite helmets of **Ls2** to durable CE armor-plated adventure suits of **SOLACE**, we keep you secure so you can push limits confidently.
-                    </p>
-                    <div class="grid grid-cols-2 gap-4 pt-2">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-orange-500 text-xl">✓</span>
-                            <span class="text-xs text-gray-300 font-bold uppercase tracking-wider">ECE & DOT Standard Visors</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-orange-500 text-xl">✓</span>
-                            <span class="text-xs text-gray-300 font-bold uppercase tracking-wider">CE Level 2 Body Armor</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-orange-500 text-xl">✓</span>
-                            <span class="text-xs text-gray-300 font-bold uppercase tracking-wider">Heavy Duty Ripstop Fabric</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-orange-500 text-xl">✓</span>
-                            <span class="text-xs text-gray-300 font-bold uppercase tracking-wider">Tested On Ultimate Terrains</span>
-                        </div>
-                    </div>
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-xs font-extrabold tracking-widest text-orange-400 uppercase biker-font">Top Tier Collaborations</span>
+                <h3 class="text-3xl font-black text-white biker-font">OUR PREMIUM <span class="text-orange-500">OFFICIAL BRANDS</span></h3>
+                <p class="text-gray-400 max-w-xl mx-auto text-xs sm:text-sm">We are official authorized catalog distributers for elite safety companies globally.</p>
+                <div class="h-1 w-20 bg-gradient-to-r from-orange-500 to-amber-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Brand Cards -->
+                <div class="bg-black/40 border border-gray-900 p-6 rounded-xl text-center group hover:border-orange-500/20 transition duration-300">
+                    <span class="text-lg font-black text-gray-300 tracking-wider block uppercase biker-font group-hover:text-orange-400 transition">LS2</span>
+                    <span class="text-[10px] text-gray-500 block mt-1 uppercase font-semibold">Premium Helmets & Visors</span>
                 </div>
-                <div class="lg:col-span-5">
-                    <div class="relative rounded-2xl overflow-hidden border border-gray-800 shadow-[0_0_35px_rgba(249,115,22,0.12)] group">
-                        <img src="image_7176a5.png" alt="Rider Helmet and Balaclava Showcase" onerror="this.src='https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?auto=format&fit=crop&q=80&w=600'" class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                        <div class="absolute bottom-4 left-4">
-                            <span class="text-xs font-bold text-orange-400 tracking-widest uppercase block mb-1">Featured Item</span>
-                            <span class="text-lg font-black text-white block">LS2 Rapid Helmet Shells</span>
-                        </div>
-                    </div>
+                <div class="bg-black/40 border border-gray-900 p-6 rounded-xl text-center group hover:border-orange-500/20 transition duration-300">
+                    <span class="text-lg font-black text-gray-300 tracking-wider block uppercase biker-font group-hover:text-orange-400 transition">SOLACE</span>
+                    <span class="text-[10px] text-gray-500 block mt-1 uppercase font-semibold">CE Level-2 Armor Jackets</span>
+                </div>
+                <div class="bg-black/40 border border-gray-900 p-6 rounded-xl text-center group hover:border-orange-500/20 transition duration-300">
+                    <span class="text-lg font-black text-gray-300 tracking-wider block uppercase biker-font group-hover:text-orange-400 transition">VIATERRA</span>
+                    <span class="text-[10px] text-gray-500 block mt-1 uppercase font-semibold">Adventure Extreme Luggage</span>
+                </div>
+                <div class="bg-black/40 border border-gray-900 p-6 rounded-xl text-center group hover:border-orange-500/20 transition duration-300">
+                    <span class="text-lg font-black text-gray-300 tracking-wider block uppercase biker-font group-hover:text-orange-400 transition">AXOR</span>
+                    <span class="text-[10px] text-gray-500 block mt-1 uppercase font-semibold">Aerodynamic Street Helmets</span>
+                </div>
+                <div class="bg-black/40 border border-gray-900 p-6 rounded-xl text-center group hover:border-orange-500/20 transition duration-300">
+                    <span class="text-lg font-black text-gray-300 tracking-wider block uppercase biker-font group-hover:text-orange-400 transition">SMK</span>
+                    <span class="text-[10px] text-gray-500 block mt-1 uppercase font-semibold">Urban Compact Visors</span>
+                </div>
+                <div class="bg-black/40 border border-gray-900 p-6 rounded-xl text-center group hover:border-orange-500/20 transition duration-300">
+                    <span class="text-lg font-black text-gray-300 tracking-wider block uppercase biker-font group-hover:text-orange-400 transition">GUARDIAN GEARS</span>
+                    <span class="text-[10px] text-gray-500 block mt-1 uppercase font-semibold">Touring & Tank Luggage Packs</span>
+                </div>
+                <div class="bg-black/40 border border-gray-900 p-6 rounded-xl text-center group hover:border-orange-500/20 transition duration-300">
+                    <span class="text-lg font-black text-gray-300 tracking-wider block uppercase biker-font group-hover:text-orange-400 transition">ORAZO</span>
+                    <span class="text-[10px] text-gray-500 block mt-1 uppercase font-semibold">Heavy Arch Riding Boots</span>
+                </div>
+                <div class="bg-black/40 border border-gray-900 p-6 rounded-xl text-center group hover:border-orange-500/20 transition duration-300">
+                    <span class="text-lg font-black text-gray-300 tracking-wider block uppercase biker-font group-hover:text-orange-400 transition">BOBO</span>
+                    <span class="text-[10px] text-gray-500 block mt-1 uppercase font-semibold">Heavy Duty Navigation Mounts</span>
                 </div>
             </div>
         </div>
@@ -380,9 +534,9 @@
 
                 <!-- Footer Menu Links -->
                 <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-gray-400 font-bold uppercase tracking-wider">
-                    <a href="#showroom" onclick="scrollToSection('showroom')" class="hover:text-orange-500 transition">Showroom Gallery</a>
-                    <a href="#outpost" onclick="scrollToSection('outpost')" class="hover:text-orange-500 transition">Outposts</a>
-                    <a href="#about" onclick="scrollToSection('about')" class="hover:text-orange-500 transition">Mission</a>
+                    <a href="#interactive-rider" class="hover:text-orange-500 transition">Gear Guide</a>
+                    <a href="#showroom" class="hover:text-orange-500 transition">Showroom Categories</a>
+                    <a href="#outpost" class="hover:text-orange-500 transition">Outposts</a>
                     <a href="https://liveurride.com" target="_blank" class="hover:text-orange-500 transition">liveurride.com</a>
                 </div>
             </div>
@@ -399,249 +553,69 @@
         </div>
     </footer>
 
-    <!-- LIGHTBOX PRODUCT INSPECTOR MODAL -->
-    <div id="product-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <!-- Overlay background -->
-            <div onclick="toggleProductModal(false)" class="fixed inset-0 bg-black/95 backdrop-blur-sm transition-opacity animate-fade-in" aria-hidden="true"></div>
-
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div class="inline-block align-bottom bg-[#0a0a0f] border border-gray-900 rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
-                <!-- Close Button -->
-                <button onclick="toggleProductModal(false)" class="absolute right-4 top-4 text-gray-400 hover:text-white p-2.5 hover:bg-gray-800 rounded-full z-10 transition">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-
-                <!-- Modal Content -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 p-6 sm:p-8" id="modal-content">
-                    <!-- Loaded dynamically via javascript helper -->
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Dynamic category fallbacks using premium Unsplash photography to ensure preview is beautiful
-        const previewFallbacks = {
-            'HELMETS': 'https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?auto=format&fit=crop&q=80&w=600',
-            'JACKETS': 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=600',
-            'BOOTS': 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&q=80&w=600',
-            'GLOVES': 'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&q=80&w=600',
-            'PANTS': 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&q=80&w=600',
-            'LUGGAGE': 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=600',
-            'ACCESSORIES': 'https://images.unsplash.com/photo-1622185135505-2d795003994a?auto=format&fit=crop&q=80&w=600'
-        };
-
-        function handleImageFallback(imgElement, category) {
-            // Prevent infinite error-loop if the fallback itself fails
-            imgElement.onerror = null;
-            const cleanCategory = category.toUpperCase();
-            imgElement.src = previewFallbacks[cleanCategory] || 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=600';
-        }
-
-        // High-fidelity local database representing exact product specs + visual assets in files
-        const products = [
-            // JACKETS (image_71c979.jpg, COOLPRO-BLACK-SIDDE-700x835-1-300x300.jpg)
-            {
-                id: 1,
-                name: "Thrift Mesh Jacket (Minima Black Edition)",
-                brand: "SOLACE",
-                category: "JACKETS",
-                rating: 4.8,
-                image: "image_71c979.jpg",
-                badge: "Summer Breathable",
-                specifications: ["High resistance mesh paneling", "CE Level 2 approved shoulder & elbow armor", "Removable thermal drop liner", "Dual-adjustment arm straps"]
+        // Interactive Gear guide Hotspot Data
+        const guideData = {
+            helmet: {
+                title: "1. Full Face Protection",
+                desc: "High integrity protective ECE 22.06 aerodynamic shells engineered specifically to safeguard riders during long-range cruiser highways and extreme mountain segments.",
+                spec1: "ECE 22.06 & DOT Certified Premium Shells",
+                spec2: "Equipped with custom inner Drop-Down Sun Visors"
             },
-            {
-                id: 2,
-                name: "Rival Urban Heavy Mesh Jacket V3.0",
-                brand: "SOLACE",
-                category: "JACKETS",
-                rating: 4.9,
-                image: "image_71c979.jpg",
-                badge: "All-Terrain Armor",
-                specifications: ["Heavy duty 600D ballistic nylon fabric", "CE Level 2 armor packet back insert included", "Dual reflective chest & sleeve accents", "Soft collar comfort trimming"]
+            jacket: {
+                title: "2. Heavy Armor Riding Jackets",
+                desc: "All-terrain dual heavy mesh outer layers designed with pre-equipped CE Level 2 protectors integrated perfectly on spine, shoulders, and elbow pivot joints.",
+                spec1: "High-resistance 600D cordura ripstop mesh panels",
+                spec2: "Full-ventilation zipper channels with thermal liners"
             },
-            {
-                id: 3,
-                name: "Asmi Ladies Riding Jacket V3.0 (Slate Grey)",
-                brand: "SOLACE",
-                category: "JACKETS",
-                rating: 4.7,
-                image: "image_71c979.jpg",
-                badge: "Ergonomic Ladies Fit",
-                specifications: ["Anatomical lady-specific secure contours", "CE Level 2 impact padding", "All-climate air control zipper system", "Internal waterproof media pocket"]
+            gloves: {
+                title: "3. Carbon Knuckle Gloves",
+                desc: "Impact resistant knuckle guards with anti-slip palm sliders. Keeps fingers fully protected while operating handlebar controls on rocky or gravel roads.",
+                spec1: "Sleek carbon composite hard knuckle inserts",
+                spec2: "Touch-sensitive index fingers for GPS screens"
             },
-            // HELMETS (image_7176a5.png)
-            {
-                id: 4,
-                name: "LS2 Rapid Solid Full Face Helmet",
-                brand: "Ls2",
-                category: "HELMETS",
-                rating: 4.9,
-                image: "image_7176a5.png",
-                badge: "ECE 22.06 Approved",
-                specifications: ["HPTT high pressure thermoplastic design", "Multi-density EPS shock absorbing liner", "Optically correct quick change visor", "Breath deflector and chin curtain"]
+            pants: {
+                title: "4. Adventure Mesh Protection Pants",
+                desc: "Highly-ventilated touring pants built to withstand water splashes and physical road sliding hazards. Perfectly contoured knee accordion designs maximize seating comfort.",
+                spec1: "Level 2 approved anatomical knee armor plates",
+                spec2: "Dual waterproof thigh utility pockets"
             },
-            {
-                id: 5,
-                name: "Axor Apex Solid Helmet (Street Focus)",
-                brand: "AXOR",
-                category: "HELMETS",
-                rating: 4.7,
-                image: "image_7176a5.png",
-                badge: "Dual Visor System",
-                specifications: ["Integrated inner drop-down sun goggles", "High performance ventilation layout", "Fully washable anti-odor inside foam padding", "Comes with official helmet pouch"]
+            boots: {
+                title: "5. Steel Shank Extreme Riding Boots",
+                desc: "Ankle-armor reinforced footwear engineered for maximum gear shifting performance and secure terrain foot grip under heavy weight cruiser conditions.",
+                spec1: "Tough water-repellant micro-fiber leather panel",
+                spec2: "Indestructible embedded steel sole shank protectors"
             },
-            {
-                id: 6,
-                name: "SMK Typhoon Street Aerodynamic Helmet",
-                brand: "SMK",
-                category: "HELMETS",
-                rating: 4.8,
-                image: "image_7176a5.png",
-                badge: "Aerodynamic Spoiler",
-                specifications: ["Scratch resistant quick extraction visor", "Pinlock-ready optical surface", "Engineered crown and chin air controllers", "Certified street legal worldwide"]
-            },
-            // PANTS (COOLPRO-BLACK-SIDDE-700x835-1-300x300.jpg)
-            {
-                id: 7,
-                name: "Solace Coolpro Mesh Protection Pants (Black)",
-                brand: "SOLACE",
-                category: "PANTS",
-                rating: 4.8,
-                image: "COOLPRO-BLACK-SIDDE-700x835-1-300x300.jpg",
-                badge: "High Ventilation",
-                specifications: ["Heavy mesh panels for ultimate air transfer", "CE Level 2 armored knee protection", "Stretch accordion panels above knees for posture", "Reflective side strips for nighttime visibility"]
-            },
-            // LUGGAGE (LehELP2022_01_540x-300x300.webp, Condor2UP_01_540x-300x300.webp, ClawWPELPOrange_01_540x-1-300x300.webp, Combo4-Mustang-Saddlebag-50L-Jaws-28L-15_57154a21-8a38-4b09-b0b9-2f05c5666be4-300x300.jpg)
-            {
-                id: 8,
-                name: "Viaterra Claw Waterproof Adventure Tail Bag",
-                brand: "VIATERRA",
-                category: "LUGGAGE",
-                rating: 4.9,
-                image: "ClawWPELPOrange_01_540x-1-300x300.webp",
-                badge: "Waterproof / Orange Trim",
-                specifications: ["55L massive capacity tail-mount design", "Roll-top inner bag with 100% waterproof seam taping", "High visibility hazard orange highlight piping", "No-slip base with 3-point mounting harness"]
-            },
-            {
-                id: 9,
-                name: "Viaterra Condor 2UP Sleek Saddlebags",
-                brand: "VIATERRA",
-                category: "LUGGAGE",
-                rating: 4.8,
-                image: "Condor2UP_01_540x-300x300.webp",
-                badge: "Saddle Comfort",
-                specifications: ["Tailored construction for non-mono-shock bikes", "Tough 1200D ballistic outer casing", "Slim side-profile prevents exhaust touch", "Quick-mount strap system for instant release"]
-            },
-            {
-                id: 10,
-                name: "Viaterra Leh Extreme Saddlebags",
-                brand: "VIATERRA",
-                category: "LUGGAGE",
-                rating: 4.9,
-                image: "LehELP2022_01_540x-300x300.webp",
-                badge: "Expedition Grade",
-                specifications: ["Tested in high Himalayan conditions", "Reinforced plastic walls keep structural shape", "Outer bottle holders with toggle lock string", "Includes 100% neon yellow storm covers"]
-            },
-            {
-                id: 11,
-                name: "Guardian Gears Mustang & Jaws Tank Bag Combo",
-                brand: "Guardian Gears",
-                category: "LUGGAGE",
-                rating: 4.7,
-                image: "Combo4-Mustang-Saddlebag-50L-Jaws-28L-15_57154a21-8a38-4b09-b0b9-2f05c5666be4-300x300.jpg",
-                badge: "Modular Touring Set",
-                specifications: ["Convertible tank-to-tail utility pack", "High strength neo-magnets for steel tanks", "Transparent top sleeve for smartphone GPS tracking", "Heavy-gauge metal zipper slides"]
-            },
-            // ACCESSORIES (WhatsApp-Image-2024-04-22-at-4.29.01-PM-300x300.jpeg, BB-BM-001-001001-300x300.jpg, BB-BM-004-001001-300x300.jpg, 1197ab63-f5b5-477d-9e6a-cdfa4e227c08-300x300.jpeg, WhatsApp-Image-2025-05-12-at-3.58.06-PM-300x300.jpeg)
-            {
-                id: 12,
-                name: "Live Ur Ride Premium Anti-Sweat Balaclava",
-                brand: "Live Ur Ride",
-                category: "ACCESSORIES",
-                rating: 4.9,
-                image: "WhatsApp-Image-2024-04-22-at-4.29.01-PM-300x300.jpeg",
-                badge: "Official LUR Gear",
-                specifications: ["Moisture-wicking mesh ventilation panels", "Seamless head-top stitch prevents skin marks", "Premium Orange LUR heat-pressed logo branding", "Breathable filter lining keeps visors fog-free"]
-            },
-            {
-                id: 13,
-                name: "Bobo Jaw-Grip Mobile Mount with QC 3.0 USB Charger (BM1)",
-                brand: "Bobo",
-                category: "ACCESSORIES",
-                rating: 4.9,
-                image: "BB-BM-001-001001-300x300.jpg",
-                badge: "1 Year Warranty",
-                specifications: ["Industrial-grade aluminum jaw grip mechanism", "QC 3.0 fast USB charging port built-in", "Shock absorbing rubber corner pads", "360-degree rotation handlebar attachment mount"]
-            },
-            {
-                id: 14,
-                name: "Bobo Sleek Phone Holder (BM4)",
-                brand: "Bobo",
-                category: "ACCESSORIES",
-                rating: 4.8,
-                image: "BB-BM-004-001001-300x300.jpg",
-                badge: "High Stability",
-                specifications: ["Reinforced bracket mount with anti-shake spacer", "Accommodates screen sizes up to 7.2 inches", "Quick-lock side wheel clamp adjustment", "Tough composite scratch-resistant backing"]
-            },
-            {
-                id: 15,
-                name: "Pinlock 70 Anti-Fog Visor Insert (High Intensity)",
-                brand: "Ls2",
-                category: "ACCESSORIES",
-                rating: 4.9,
-                image: "1197ab63-f5b5-477d-9e6a-cdfa4e227c08-300x300.jpeg",
-                badge: "Visor Essential",
-                specifications: ["Pinlock 70 class fog-preventing moisture barrier", "Highly transparent optical grade material", "Guarantees clear vision in rainy or freezing routes", "Seals air gap perfectly via custom silicon border"]
-            },
-            {
-                id: 16,
-                name: "UE Autotech Elite Helmet Cleaner Spray (Lemon Fragrance)",
-                brand: "HELMET CARE",
-                category: "ACCESSORIES",
-                rating: 4.8,
-                image: "WhatsApp-Image-2025-05-12-at-3.58.06-PM-300x300.jpeg",
-                badge: "Clean & Fresh Inside",
-                specifications: ["Quick foam active cleanser spray", "Removes accumulated sweat odor instantly", "Infused with refreshing clean lemon fragrance", "Safe for delicate helmet interior liners"]
-            },
-            // BOOTS & GLOVES placeholders based on category requirement
-            {
-                id: 17,
-                name: "Orazo Picus Heavy Duty Riding Boots",
-                brand: "ORAZO",
-                category: "BOOTS",
-                rating: 4.9,
-                image: "image_7176a5.png",
-                badge: "Steel Shank Armor",
-                specifications: ["Indestructible steel shank arch protector", "Water repelling heavy leather panels", "Ankle bone armor disc coverage", "Dual compound grip outsole design"]
-            },
-            {
-                id: 18,
-                name: "Solace Tourer Mesh Carbon Gloves",
-                brand: "SOLACE",
-                category: "GLOVES",
-                rating: 4.8,
-                image: "image_71c979.jpg",
-                badge: "Premium Knuckle Armor",
-                specifications: ["Solid TPU composite carbon knuckle cover", "Air-vented mesh fingers prevent sweat accumulation", "Touch-sensitive fingertip for navigation control", "Double stitch secure palm slider panel"]
+            luggage: {
+                title: "6. Tail & Saddle Touring Luggage",
+                desc: "100% waterproof heavy-duty travel luggage designed to mount firmly onto rear steel racks and side frames without shifting during heavy mountain cornering.",
+                spec1: "Up to 55L storage capacity with welded-seam liners",
+                spec2: "3-point heavy duty harness anchor strap straps"
             }
-        ];
-
-        // Active Application States
-        let activeCategory = 'all';
-        let activeBrand = 'all';
-        let searchQuery = '';
-        let currentSlide = 0;
-
-        // Initialize showroom on load
-        window.onload = function() {
-            renderShowroom();
-            startHeroSlideshow();
         };
+
+        function focusHotspot(key, fallbackCategory) {
+            const node = guideData[key];
+            if (!node) return;
+
+            // Paint dynamic info cards
+            document.getElementById('hotspot-title').innerText = node.title;
+            document.getElementById('hotspot-desc').innerText = node.desc;
+            document.getElementById('hotspot-spec-1').innerText = node.spec1;
+            document.getElementById('hotspot-spec-2').innerText = node.spec2;
+
+            // Formulate specific WhatsApp direct redirection message
+            const baseText = `Hello Mr. Kartik, I saw your Live Ur Ride interactive gear guide and want to inquire about premium ${fallbackCategory} options for my cruiser bike.`;
+            const formattedUrl = `https://wa.me/918567967985?text=${encodeURIComponent(baseText)}`;
+            document.getElementById('hotspot-wa-btn').setAttribute('href', formattedUrl);
+
+            // Quick smooth feedback animation on the display card
+            const box = document.getElementById('hotspot-info-box');
+            box.classList.add('border-orange-500');
+            setTimeout(() => {
+                box.classList.remove('border-orange-500');
+            }, 600);
+        }
 
         // Scroll helper
         function scrollToSection(id) {
@@ -658,262 +632,7 @@
             }
         }
 
-        // Hero Slider functions
-        function startHeroSlideshow() {
-            setInterval(() => {
-                changeHeroSlide(1);
-            }, 6000);
-        }
-
-        function changeHeroSlide(direction) {
-            const slides = document.querySelectorAll('.hero-slide');
-            const dots = document.querySelectorAll('.slide-dot');
-            if (slides.length === 0) return;
-            
-            slides[currentSlide].classList.remove('opacity-100');
-            slides[currentSlide].classList.add('opacity-0');
-            dots[currentSlide].classList.remove('bg-orange-500', 'w-10');
-            dots[currentSlide].classList.add('bg-gray-600', 'w-3');
-
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
-
-            slides[currentSlide].classList.remove('opacity-0');
-            slides[currentSlide].classList.add('opacity-100');
-            dots[currentSlide].classList.add('bg-orange-500', 'w-10');
-            dots[currentSlide].classList.remove('bg-gray-600', 'w-3');
-        }
-
-        function setHeroSlide(index) {
-            const slides = document.querySelectorAll('.hero-slide');
-            const dots = document.querySelectorAll('.slide-dot');
-            if (slides.length === 0) return;
-            
-            slides[currentSlide].classList.remove('opacity-100');
-            slides[currentSlide].classList.add('opacity-0');
-            dots[currentSlide].classList.remove('bg-orange-500', 'w-10');
-            dots[currentSlide].classList.add('bg-gray-600', 'w-3');
-
-            currentSlide = index;
-
-            slides[currentSlide].classList.remove('opacity-0');
-            slides[currentSlide].classList.add('opacity-100');
-            dots[currentSlide].classList.add('bg-orange-500', 'w-10');
-            dots[currentSlide].classList.remove('bg-gray-600', 'w-3');
-        }
-
-        // Category Filter Hook
-        function setCategoryFilter(category) {
-            activeCategory = category;
-            
-            // Highlight correct tab element
-            const tabs = document.querySelectorAll('.category-tab');
-            tabs.forEach(tab => {
-                if (tab.id === `tab-${category}`) {
-                    tab.className = "category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-orange-500/20 bg-orange-500/10 text-orange-400";
-                } else {
-                    tab.className = "category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700 bg-gray-950/50";
-                }
-            });
-
-            renderShowroom();
-        }
-
-        // Brand dropdown hook
-        function handleBrandSelection(brand) {
-            activeBrand = brand;
-            renderShowroom();
-        }
-
-        // Search hook
-        function handleSearch(val) {
-            searchQuery = val.toLowerCase().trim();
-            renderShowroom();
-        }
-
-        function setBrandFilter(brand) {
-            activeBrand = brand;
-            const select = document.getElementById('gallery-brand');
-            if (select) select.value = brand;
-            renderShowroom();
-        }
-
-        // Reset utility
-        function resetFilters() {
-            activeCategory = 'all';
-            activeBrand = 'all';
-            searchQuery = '';
-            
-            const select = document.getElementById('gallery-brand');
-            if (select) select.value = 'all';
-            const search = document.getElementById('gallery-search');
-            if (search) search.value = '';
-
-            // Reset tabs class highlighting
-            const tabs = document.querySelectorAll('.category-tab');
-            tabs.forEach(tab => {
-                if (tab.id === 'tab-all') {
-                    tab.className = "category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-orange-500/20 bg-orange-500/10 text-orange-400";
-                } else {
-                    tab.className = "category-tab px-5 py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700 bg-gray-950/50";
-                }
-            });
-
-            renderShowroom();
-        }
-
-        // Core Showroom Painting Logic (With gorgeous dynamic visual fallbacks)
-        function renderShowroom() {
-            const grid = document.getElementById('product-grid');
-            const fallback = document.getElementById('no-products-fallback');
-            const counterLabel = document.getElementById('gallery-counter-label');
-
-            // Apply filters
-            let filtered = products.filter(p => {
-                const matchesCategory = (activeCategory === 'all' || p.category.toUpperCase() === activeCategory.toUpperCase());
-                const matchesBrand = (activeBrand === 'all' || p.brand.toLowerCase() === activeBrand.toLowerCase());
-                
-                let matchesSearch = true;
-                if (searchQuery !== '') {
-                    matchesSearch = p.name.toLowerCase().includes(searchQuery) || 
-                                    p.brand.toLowerCase().includes(searchQuery) ||
-                                    p.category.toLowerCase().includes(searchQuery);
-                }
-
-                return matchesCategory && matchesBrand && matchesSearch;
-            });
-
-            // Update counter labels
-            const categoryName = activeCategory === 'all' ? 'All products' : activeCategory;
-            const brandName = activeBrand === 'all' ? '' : `by ${activeBrand}`;
-            counterLabel.innerText = `Showing ${filtered.length} matching items under ${categoryName} ${brandName}`;
-
-            if (filtered.length === 0) {
-                grid.innerHTML = '';
-                fallback.classList.remove('hidden');
-                return;
-            } else {
-                fallback.classList.add('hidden');
-            }
-
-            // Print Cards to Screen
-            grid.innerHTML = filtered.map(item => {
-                return `
-                    <div class="group relative bg-[#101015] border border-gray-900 hover:border-orange-500/30 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-[0_4px_30px_rgba(249,115,22,0.12)] hover:-translate-y-1.5 flex flex-col justify-between">
-                        <!-- Card Banner Thumbnail Frame -->
-                        <div class="relative overflow-hidden bg-zinc-950/80 aspect-square flex items-center justify-center p-6 cursor-pointer" onclick="openProductDetail(${item.id})">
-                            ${item.badge ? `<span class="absolute top-4 left-4 z-10 bg-gradient-to-r from-orange-500 to-amber-500 text-black text-[10px] font-black uppercase px-2.5 py-1 rounded-md shadow-md tracking-wider">${item.badge}</span>` : ''}
-                            
-                            <img src="${item.image}" alt="${item.name}" onerror="handleImageFallback(this, '${item.category}')" class="object-contain max-h-full max-w-full transition duration-500 group-hover:scale-110">
-                            
-                            <!-- Immersive Mask Overlay -->
-                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                                <span class="bg-orange-500 text-black font-extrabold text-xs tracking-wider uppercase px-4 py-2 rounded-lg shadow-lg">Inspect Gear</span>
-                            </div>
-                        </div>
-
-                        <!-- Card Body details -->
-                        <div class="p-5 flex flex-col justify-between flex-grow">
-                            <div>
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-[10px] font-extrabold tracking-widest text-orange-400 uppercase">${item.brand} ORIGINAL</span>
-                                    <span class="flex items-center gap-1 text-[11px] text-yellow-400 font-bold bg-yellow-400/10 px-2 py-0.5 rounded">
-                                        ★ ${item.rating.toFixed(1)}
-                                    </span>
-                                </div>
-
-                                <h4 class="text-white font-extrabold text-sm hover:text-orange-400 transition cursor-pointer leading-tight mb-2 uppercase line-clamp-2" onclick="openProductDetail(${item.id})">
-                                    ${item.name}
-                                </h4>
-                                
-                                <span class="inline-block text-[10px] bg-gray-800 text-gray-400 px-2 py-0.5 rounded font-bold uppercase mb-4">${item.category}</span>
-                            </div>
-
-                            <!-- Showroom Actions (No Cart, pure WhatsApp redirection) -->
-                            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-gray-900 mt-auto">
-                                <button onclick="openProductDetail(${item.id})" class="py-2 bg-gray-900 text-gray-300 hover:text-white hover:bg-gray-800 text-xs font-bold rounded-lg transition text-center uppercase tracking-wide">
-                                    Specs
-                                </button>
-                                <a href="https://wa.me/918567967985?text=Hello%20Mr.%20Kartik%2C%20I%20am%20inquiring%20about%20the%20${encodeURIComponent(item.brand)}%20${encodeURIComponent(item.name)}%20from%20your%20Live%20Ur%20Ride%20store%20catalog." target="_blank" class="py-2 bg-orange-500 hover:bg-orange-600 text-black text-xs font-black rounded-lg transition text-center uppercase tracking-wide flex items-center justify-center space-x-1">
-                                    <span>Inquire</span>
-                                    <span>➔</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Modal Lightbox Helpers
-        function toggleProductModal(show) {
-            const modal = document.getElementById('product-modal');
-            if (show) {
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            } else {
-                modal.classList.add('hidden');
-                document.body.style.overflow = '';
-            }
-        }
-
-        function openProductDetail(id) {
-            const item = products.find(p => p.id === id);
-            if (!item) return;
-
-            const modalContent = document.getElementById('modal-content');
-
-            modalContent.innerHTML = `
-                <!-- Left Visual Image Showcase -->
-                <div class="md:col-span-6 bg-zinc-950 border border-gray-900 rounded-xl p-8 flex items-center justify-center h-80 sm:h-96 relative">
-                    ${item.badge ? `<span class="absolute top-4 left-4 bg-orange-500 text-black text-xs font-extrabold uppercase px-3 py-1 rounded-lg tracking-wider">${item.badge}</span>` : ''}
-                    <img src="${item.image}" alt="${item.name}" onerror="handleImageFallback(this, '${item.category}')" class="object-contain max-h-full max-w-full">
-                </div>
-
-                <!-- Right Detailed Technical highlights -->
-                <div class="md:col-span-6 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-black tracking-widest text-orange-500 uppercase">${item.brand} ORIGINAL</span>
-                            <span class="text-xs text-yellow-400 font-bold bg-yellow-500/10 px-2.5 py-1 rounded">★ ${item.rating.toFixed(1)} / 5 Rating</span>
-                        </div>
-
-                        <h3 class="text-xl sm:text-2xl font-black text-white leading-tight uppercase mb-2">${item.name}</h3>
-                        <div class="flex items-center gap-2 mb-6">
-                            <span class="text-xs bg-gray-800 text-gray-300 px-3 py-1 rounded-full uppercase tracking-wider font-semibold">${item.category}</span>
-                            <span class="text-xs bg-orange-950/40 text-orange-400 border border-orange-900 px-3 py-1 rounded-full uppercase font-medium">Available</span>
-                        </div>
-
-                        <!-- Detailed Technical list -->
-                        <div class="mb-6">
-                            <span class="text-xs font-bold text-white uppercase tracking-wider block mb-3">Technical Highlights</span>
-                            <ul class="space-y-2 text-xs text-gray-400">
-                                ${item.specifications.map(spec => `
-                                    <li class="flex items-center space-x-2">
-                                        <span class="text-orange-500">•</span>
-                                        <span>${spec}</span>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Direct Query Action -->
-                    <div class="space-y-3 pt-4 border-t border-gray-900">
-                        <a href="https://wa.me/918567967985?text=Hello%20Mr.%20Kartik%2C%20I%20saw%20the%20${encodeURIComponent(item.brand)}%20${encodeURIComponent(item.name)}%20in%20your%20Live%20Ur%20Ride%20catalog%20and%20wanted%20to%20query%20stock%20and%20sizing." target="_blank" class="w-full text-center py-4 bg-orange-500 hover:bg-orange-600 text-black font-black rounded-xl tracking-wider text-sm uppercase transition duration-200 flex items-center justify-center gap-2">
-                            <span>Inquire via WhatsApp</span>
-                            <span>➔</span>
-                        </a>
-                        <button onclick="toggleProductModal(false)" class="w-full text-center py-3 bg-gray-900 hover:bg-gray-800 text-gray-400 hover:text-white rounded-xl transition text-xs font-semibold uppercase">
-                            Back To Gallery
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            toggleProductModal(true);
-        }
-
-        // Mobile dropdown toggle
+        // Mobile drawer panel toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
