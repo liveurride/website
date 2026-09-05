@@ -46,10 +46,10 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     
-    #detailSheet {
+    .sheet-modal {
       transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.2s ease-in-out;
     }
-    #detailSheet.closed {
+    .sheet-modal.closed {
       transform: translateY(100%);
       opacity: 0;
       pointer-events: none;
@@ -73,9 +73,14 @@
     </div>
     
     <div class="flex items-center gap-2">
+      <button onclick="openChecklistModal()" class="w-8 h-8 rounded-full bg-cardBg border border-cardBorder flex items-center justify-center text-neutral-300 active:scale-95 transition-transform" title="Rider Checklist">
+        <svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+      </button>
+
       <a href="tel:+918567967985" class="w-8 h-8 rounded-full bg-cardBg border border-cardBorder flex items-center justify-center text-neutral-300 active:scale-95 transition-transform">
         <svg class="w-4 h-4 fill-current text-brand" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
       </a>
+
       <a href="https://instagram.com/liveurridemotorcycleshop" target="_blank" rel="noopener noreferrer" 
         class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cardBg border border-cardBorder text-xs font-semibold text-neutral-200 active:scale-95 transition-transform">
         <svg class="w-3.5 h-3.5 fill-pink-500" viewBox="0 0 24 24">
@@ -133,7 +138,11 @@
 
       <div class="px-4 pb-4">
         <div id="productGrid" class="grid grid-cols-2 gap-3">
+          <div class="col-span-2 text-center py-16 text-neutral-500 text-xs flex items-center justify-center gap-2">
+            <svg class="animate-spin h-4 w-4 text-brand" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+            <span>Syncing products from Live Google Sheet...</span>
           </div>
+        </div>
       </div>
     </section>
 
@@ -170,7 +179,7 @@
         </div>
         
         <p class="text-neutral-300 text-xs leading-relaxed">
-          Premium motorcycle riding protective gear, modular luggage, auxiliary lighting systems, and touring accessories.
+          Premium motorcycle riding protective gear, modular luggage, auxiliary lighting systems, and touring accessories. Every item in this catalog is curated for safety, real-road durability, and rider ergonomics.
         </p>
 
         <div class="divide-y divide-cardBorder text-xs pt-1">
@@ -184,11 +193,11 @@
           </div>
           <div class="py-3 flex justify-between items-center">
             <span class="text-neutral-400">Delivery</span>
-            <span class="text-neutral-200 font-medium">Pan-India Express Service</span>
+            <span class="text-neutral-200 font-medium">Pan-India Express Dispatch</span>
           </div>
           <div class="py-3 flex justify-between items-center">
             <span class="text-neutral-400">Fitting Guidance</span>
-            <span class="text-neutral-200 font-medium">WhatsApp Video Assistance</span>
+            <span class="text-neutral-200 font-medium">WhatsApp Video Fitting Call</span>
           </div>
         </div>
 
@@ -208,9 +217,53 @@
   </main>
 
   <div id="sheetBackdrop" onclick="closeProductModal()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-200"></div>
-  <div id="detailSheet" class="fixed inset-x-0 bottom-0 max-w-lg mx-auto z-50 bg-[#141414] border-t border-cardBorder rounded-t-3xl p-5 shadow-2xl closed">
+  <div id="detailSheet" class="sheet-modal fixed inset-x-0 bottom-0 max-w-lg mx-auto z-50 bg-[#141414] border-t border-cardBorder rounded-t-3xl p-5 shadow-2xl closed max-h-[85vh] overflow-y-auto no-scrollbar">
     <div class="w-12 h-1.5 bg-neutral-700 rounded-full mx-auto mb-4 cursor-pointer" onclick="closeProductModal()"></div>
     <div id="sheetContent" class="space-y-4"></div>
+  </div>
+
+  <div id="checklistBackdrop" onclick="closeChecklistModal()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-200"></div>
+  <div id="checklistSheet" class="sheet-modal fixed inset-x-0 bottom-0 max-w-lg mx-auto z-50 bg-[#141414] border-t border-cardBorder rounded-t-3xl p-5 shadow-2xl closed max-h-[85vh] overflow-y-auto no-scrollbar">
+    <div class="w-12 h-1.5 bg-neutral-700 rounded-full mx-auto mb-4 cursor-pointer" onclick="closeChecklistModal()"></div>
+    <div class="space-y-4">
+      <div class="border-b border-cardBorder pb-3">
+        <h3 class="font-teko text-2xl uppercase tracking-wider text-white">Touring Ride Essential Checklist</h3>
+        <p class="text-xs text-neutral-400">Check off your mandatory gear and spares before your road trip</p>
+      </div>
+      <div class="space-y-2.5 text-xs text-neutral-300" id="checklistItems">
+        <label class="flex items-center gap-3 bg-darkSurface p-2.5 rounded-xl border border-cardBorder cursor-pointer">
+          <input type="checkbox" class="w-4 h-4 rounded accent-brand" />
+          <span>Full-Armor Riding Jacket & Pants</span>
+        </label>
+        <label class="flex items-center gap-3 bg-darkSurface p-2.5 rounded-xl border border-cardBorder cursor-pointer">
+          <input type="checkbox" class="w-4 h-4 rounded accent-brand" />
+          <span>ECE / DOT Certified Helmet + Clean Visor</span>
+        </label>
+        <label class="flex items-center gap-3 bg-darkSurface p-2.5 rounded-xl border border-cardBorder cursor-pointer">
+          <input type="checkbox" class="w-4 h-4 rounded accent-brand" />
+          <span>Abrasion-Resistant Gloves (Full Gauntlet or Short)</span>
+        </label>
+        <label class="flex items-center gap-3 bg-darkSurface p-2.5 rounded-xl border border-cardBorder cursor-pointer">
+          <input type="checkbox" class="w-4 h-4 rounded accent-brand" />
+          <span>Reinforced Ankle Riding Boots</span>
+        </label>
+        <label class="flex items-center gap-3 bg-darkSurface p-2.5 rounded-xl border border-cardBorder cursor-pointer">
+          <input type="checkbox" class="w-4 h-4 rounded accent-brand" />
+          <span>Waterproof Rain Liners or External Rain Suit</span>
+        </label>
+        <label class="flex items-center gap-3 bg-darkSurface p-2.5 rounded-xl border border-cardBorder cursor-pointer">
+          <input type="checkbox" class="w-4 h-4 rounded accent-brand" />
+          <span>Puncture Kit & Portable Tire Inflator</span>
+        </label>
+        <label class="flex items-center gap-3 bg-darkSurface p-2.5 rounded-xl border border-cardBorder cursor-pointer">
+          <input type="checkbox" class="w-4 h-4 rounded accent-brand" />
+          <span>Vibration-Dampened Mobile Mount & Bungees</span>
+        </label>
+      </div>
+      <button onclick="closeChecklistModal()" class="w-full bg-cardBg hover:bg-neutral-800 border border-cardBorder text-neutral-200 py-3 rounded-xl font-bold text-xs uppercase tracking-wider">
+        Close Checklist
+      </button>
+    </div>
   </div>
 
   <nav class="fixed bottom-0 inset-x-0 z-40 bg-[#0d0d0d]/95 backdrop-blur-md border-t border-cardBorder px-6 py-2 pb-[max(0.6rem,env(safe-area-inset-bottom))]">
@@ -233,81 +286,82 @@
   <script>
     const STORE_PHONE = "+918567967985";
     const WA_NUMBER = "918567967985";
+    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTtZLnKoae7XfhDbiJi-F5iF49hj3dUN5yEXZhY5VcA_B-n0QTOwcrxeLwEpIQJgE69PsFp-GNvGXfX/pub?gid=0&single=true&output=csv";
 
-    const CATEGORIES = ["All", "Jackets", "Pants", "Boots", "Gloves", "Helmets", "Luggage", "Lights"];
-
-    const PRODUCTS = [
-      {
-        id: "LUR-JKT-01",
-        name: "Solace All-Weather Mesh Touring Jacket",
-        category: "Jackets",
-        badge: "Armored",
-        image: "./jackets.jfif",
-        features: ["CE Level 2 armor at back, shoulder & elbow", "High-density mesh airflow panels", "Includes thermal & waterproof rain liners"]
-      },
-      {
-        id: "LUR-PNT-01",
-        name: "Solace Cool Breeze Adventure Riding Pants",
-        category: "Pants",
-        badge: "Airflow",
-        image: "./coolbreeze.webp",
-        features: ["High-visibility neon contrast panels", "CE approved knee & hip protectors", "Stretch accordion panels for riding posture comfort"]
-      },
-      {
-        id: "LUR-BOT-01",
-        name: "Solace Track & Touring Leather Boots",
-        category: "Boots",
-        badge: "CE Certified",
-        image: "./boots.webp",
-        features: ["Replaceable metal toe sliders", "Ankle & heel reinforcement armor", "Anti-slip vulcanized oil-resistant sole"]
-      },
-      {
-        id: "LUR-GLV-01",
-        name: "Solace Furious Full-Gauntlet Racing Gloves",
-        category: "Gloves",
-        badge: "Kangaroo Leather",
-        image: "./gloves.webp",
-        features: ["Premium Kangaroo palm for feel & durability", "Carbon knuckle and scaphoid palm sliders", "CE certified Level 1 KP safety standard"]
-      },
-      {
-        id: "LUR-HLM-01",
-        name: "LS2 Dual-Visor Aerodynamic Helmet",
-        category: "Helmets",
-        badge: "ECE Approved",
-        image: "./helmets.webp",
-        features: ["Quick-deploy internal drop-down sun visor", "Laser-cut multi-density EPS liner", "Pinlock-ready anti-scratch main visor"]
-      },
-      {
-        id: "LUR-LUG-01",
-        name: "Solace Heavy-Duty Expedition Tail Duffel Bag",
-        category: "Luggage",
-        badge: "Waterproof",
-        image: "./luggage.webp",
-        features: ["100% waterproof 500D PVC roll-top system", "Heavy-duty tie-down straps with universal quick buckles", "MOLLE webbing for extra gear attachment"]
-      },
-      {
-        id: "LUR-LUG-02",
-        name: "Solace Multi-Utility Motorcycle Tank Bag",
-        category: "Luggage",
-        badge: "Expandable",
-        image: "./luggage.jpg",
-        features: ["Magnetic & strap mounting compatible", "Top transparent touch-sensitive phone pocket", "Includes high-visibility waterproof rain cover"]
-      },
-      {
-        id: "LUR-LGT-01",
-        name: "Dual Projector LED Auxiliary Fog Lights (Pair)",
-        category: "Lights",
-        badge: "High Beam",
-        image: "./lights.webp",
-        features: ["Dual color output (Amber Fog / White High Beam)", "Solid CNC aluminum housing with protective grille", "IP68 waterproof for extreme wet rides"]
-      }
-    ];
-
+    let PRODUCTS = [];
+    let CATEGORIES = ["All"];
     let selectedCategory = "All";
     let searchQuery = "";
+    let selectedProductSize = "L";
 
     function triggerHaptic() {
       if ("vibrate" in navigator) navigator.vibrate(10);
+    }
+
+    // Parse CSV handling quotes and delimiters accurately
+    function parseCSV(text) {
+      const lines = text.trim().split(/\r?\n/);
+      if (lines.length < 2) return [];
+      
+      const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+      const result = [];
+
+      for (let i = 1; i < lines.length; i++) {
+        let line = lines[i];
+        if (!line.trim()) continue;
+
+        let row = [];
+        let inQuotes = false;
+        let token = "";
+
+        for (let j = 0; j < line.length; j++) {
+          let char = line[j];
+          if (char === '"' || char === "'") {
+            inQuotes = !inQuotes;
+          } else if (char === ',' && !inQuotes) {
+            row.push(token.trim());
+            token = "";
+          } else {
+            token += char;
+          }
+        }
+        row.push(token.trim());
+
+        let obj = {};
+        headers.forEach((h, idx) => {
+          let val = row[idx] ? row[idx].replace(/^["']|["']$/g, '').trim() : "";
+          obj[h] = val;
+        });
+
+        if (obj.name && obj.name !== "") {
+          obj.features = obj.features ? obj.features.split('|').map(f => f.trim()).filter(Boolean) : [];
+          result.push(obj);
+        }
+      }
+      return result;
+    }
+
+    // Fetch Google Sheet live data
+    async function fetchLiveProducts() {
+      try {
+        const response = await fetch(SHEET_CSV_URL + '&_t=' + Date.now()); // cache buster
+        if (!response.ok) throw new Error("Could not load sheet");
+        const csvData = await response.text();
+        const parsed = parseCSV(csvData);
+        
+        if (parsed.length > 0) {
+          PRODUCTS = parsed;
+          
+          // Auto-generate categories from products
+          const uniqueCats = ["All", ...new Set(PRODUCTS.map(p => p.category).filter(Boolean))];
+          CATEGORIES = uniqueCats;
+          
+          initCategoryTabs();
+          renderProducts();
+        }
+      } catch (err) {
+        console.error("CSV fetch error, rendering fallback", err);
+      }
     }
 
     function initCategoryTabs() {
@@ -341,7 +395,8 @@
       const grid = document.getElementById("productGrid");
       const filtered = PRODUCTS.filter(p => {
         const matchesCat = selectedCategory === "All" || p.category === selectedCategory;
-        const matchesQuery = p.name.toLowerCase().includes(searchQuery) || p.category.toLowerCase().includes(searchQuery);
+        const matchesQuery = (p.name && p.name.toLowerCase().includes(searchQuery)) || 
+                             (p.category && p.category.toLowerCase().includes(searchQuery));
         return matchesCat && matchesQuery;
       });
 
@@ -367,9 +422,9 @@
               <h3 class="text-xs font-bold text-white line-clamp-2 mt-0.5 leading-snug">${p.name}</h3>
             </div>
             <div class="mt-3 flex items-center justify-between border-t border-cardBorder/60 pt-2">
-              <span class="text-[10px] text-neutral-400 font-medium">Tap to view</span>
+              <span class="text-[10px] text-neutral-400 font-medium">Explore</span>
               <span class="text-[10px] bg-neutral-800 border border-cardBorder text-neutral-200 font-bold px-2 py-1 rounded-lg flex items-center gap-1 group-hover:bg-brand group-hover:border-brand transition-colors">
-                <span>Details</span>
+                <span>View</span>
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
               </span>
             </div>
@@ -378,12 +433,30 @@
       `).join('');
     }
 
+    // Modal Sheet Functionality with Size Selector
     function openProductModal(productId) {
       triggerHaptic();
       const product = PRODUCTS.find(p => p.id === productId);
       if (!product) return;
 
-      const waMsg = encodeURIComponent(`Hi Live Ur Ride, I am inquiring about: ${product.name}. Please share sizing, availability, and details.`);
+      selectedProductSize = "L"; // default
+      renderModalContent(product);
+
+      document.getElementById("sheetBackdrop").classList.remove("pointer-events-none", "opacity-0");
+      document.getElementById("detailSheet").classList.remove("closed");
+    }
+
+    function selectSize(size, productId) {
+      selectedProductSize = size;
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (product) renderModalContent(product);
+    }
+
+    function renderModalContent(product) {
+      const isSizedItem = ["Jackets", "Pants", "Boots", "Gloves", "Helmets"].includes(product.category);
+      const sizes = isSizedItem ? (product.category === "Boots" ? ["41", "42", "43", "44", "45"] : ["S", "M", "L", "XL", "2XL"]) : ["Universal Fit"];
+
+      const waMsg = encodeURIComponent(`Hi Live Ur Ride, I am inquiring about: ${product.name} (Ref: ${product.id}) in Size: ${selectedProductSize}. Please confirm stock availability.`);
       const waLink = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
 
       const content = document.getElementById("sheetContent");
@@ -399,15 +472,31 @@
           </div>
         </div>
 
+        ${isSizedItem ? `
+          <div class="space-y-1.5">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-neutral-400 font-medium">Select Sizing:</span>
+              <span class="text-brand font-bold">Selected: ${selectedProductSize}</span>
+            </div>
+            <div class="flex gap-2">
+              ${sizes.map(s => `
+                <button onclick="selectSize('${s}', '${product.id}')" class="flex-1 py-1.5 rounded-lg text-xs font-bold border transition-colors ${selectedProductSize === s ? 'bg-brand text-white border-brand' : 'bg-cardBg border-cardBorder text-neutral-300'}">
+                  ${s}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+
         <div class="bg-darkSurface border border-cardBorder rounded-xl p-3 space-y-2">
           <p class="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">Features & Specifications</p>
           <div class="space-y-1.5">
-            ${product.features.map(f => `
+            ${product.features.length > 0 ? product.features.map(f => `
               <div class="flex items-start gap-2 text-xs text-neutral-300">
                 <span class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></span>
                 <span>${f}</span>
               </div>
-            `).join('')}
+            `).join('') : '<p class="text-xs text-neutral-400">Tested motorcycle touring accessory.</p>'}
           </div>
         </div>
 
@@ -422,9 +511,6 @@
           </a>
         </div>
       `;
-
-      document.getElementById("sheetBackdrop").classList.remove("pointer-events-none", "opacity-0");
-      document.getElementById("detailSheet").classList.remove("closed");
     }
 
     function closeProductModal() {
@@ -432,6 +518,19 @@
       document.getElementById("detailSheet").classList.add("closed");
     }
 
+    // Touring Checklist Modal
+    function openChecklistModal() {
+      triggerHaptic();
+      document.getElementById("checklistBackdrop").classList.remove("pointer-events-none", "opacity-0");
+      document.getElementById("checklistSheet").classList.remove("closed");
+    }
+
+    function closeChecklistModal() {
+      document.getElementById("checklistBackdrop").classList.add("pointer-events-none", "opacity-0");
+      document.getElementById("checklistSheet").classList.add("closed");
+    }
+
+    // Tab Navigation Switcher
     function switchTab(tabId) {
       triggerHaptic();
       ['shop', 'reels', 'info'].forEach(id => {
@@ -446,7 +545,6 @@
       activeNav.classList.remove('text-neutral-400', 'font-medium');
       activeNav.classList.add('text-brand', 'font-bold');
 
-      // Pause banner video when leaving shop view to save battery and data
       const heroVid = document.getElementById("heroBannerVideo");
       if (heroVid) {
         if (tabId === 'shop') {
@@ -459,16 +557,8 @@
       window.dispatchEvent(new Event('resize'));
     }
 
-    // Force autoplay attempt on mobile initial boot
-    document.addEventListener("DOMContentLoaded", () => {
-      const heroVid = document.getElementById("heroBannerVideo");
-      if (heroVid) {
-        heroVid.play().catch(() => {});
-      }
-    });
-
-    initCategoryTabs();
-    renderProducts();
+    // Initial Load
+    fetchLiveProducts();
   </script>
 </body>
 </html>
