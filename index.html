@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="./live%20ur%20ride%20logo.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -91,15 +91,27 @@
     <section id="shopView" class="space-y-4">
       
       <div class="px-4 pt-3">
-        <div class="relative w-full h-44 rounded-2xl overflow-hidden border border-cardBorder shadow-2xl bg-neutral-900">
-          <img src="./shop.jfif" alt="Live Ur Ride Workshop" class="w-full h-full object-cover brightness-75 scale-105" 
-            onerror="this.style.display='none'" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-          <div class="absolute bottom-3 left-3 right-3 flex justify-between items-end">
+        <div class="relative w-full h-[380px] rounded-3xl overflow-hidden border border-cardBorder shadow-2xl bg-neutral-900">
+          <video 
+            id="heroBannerVideo" 
+            src="./bannervideo.mp4" 
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            webkit-playsinline 
+            preload="auto"
+            poster="./shop.jfif" 
+            class="w-full h-full object-cover">
+          </video>
+          
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent pointer-events-none"></div>
+
+          <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end pointer-events-none">
             <div>
-              <span class="bg-brand text-white text-[9px] font-extrabold uppercase px-2 py-0.5 rounded tracking-wider">Flagship Store</span>
-              <h2 class="font-teko text-2xl uppercase tracking-wider text-white mt-1 leading-none">Equip Your Adventure</h2>
-              <p class="text-[11px] text-neutral-300 font-medium">Genuine Riding Gears • Armor • Touring Kits</p>
+              <span class="bg-brand text-white text-[9px] font-extrabold uppercase px-2.5 py-0.5 rounded-md tracking-wider shadow">Live In Action</span>
+              <h2 class="font-teko text-3xl uppercase tracking-wider text-white mt-1 leading-none drop-shadow">Equip Your Adventure</h2>
+              <p class="text-[11px] text-neutral-300 font-medium drop-shadow">Touring Armor • Water Repellent Luggage • Lighting</p>
             </div>
           </div>
         </div>
@@ -224,7 +236,6 @@
 
     const CATEGORIES = ["All", "Jackets", "Pants", "Boots", "Gloves", "Helmets", "Luggage", "Lights"];
 
-    // Products Gallery Catalog (Prices Removed)
     const PRODUCTS = [
       {
         id: "LUR-JKT-01",
@@ -435,8 +446,26 @@
       activeNav.classList.remove('text-neutral-400', 'font-medium');
       activeNav.classList.add('text-brand', 'font-bold');
 
+      // Pause banner video when leaving shop view to save battery and data
+      const heroVid = document.getElementById("heroBannerVideo");
+      if (heroVid) {
+        if (tabId === 'shop') {
+          heroVid.play().catch(() => {});
+        } else {
+          heroVid.pause();
+        }
+      }
+
       window.dispatchEvent(new Event('resize'));
     }
+
+    // Force autoplay attempt on mobile initial boot
+    document.addEventListener("DOMContentLoaded", () => {
+      const heroVid = document.getElementById("heroBannerVideo");
+      if (heroVid) {
+        heroVid.play().catch(() => {});
+      }
+    });
 
     initCategoryTabs();
     renderProducts();
