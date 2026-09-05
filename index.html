@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-black">
+<html lang="en" class="h-full bg-[#0d0d0d]">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>LIVE UR RIDE | Motorcycle Gear & Luggage</title>
-  <meta name="theme-color" content="#0a0a0a" />
+  <title>LIVE UR RIDE | Motorcycle Gear, Luggage & Accessories</title>
+  <meta name="theme-color" content="#0d0d0d" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <link rel="icon" type="image/png" href="live ur ride logo.png" />
+  <link rel="apple-touch-icon" href="live ur ride logo.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,10 +23,9 @@
           colors: {
             brand: '#FF5400',
             brandDark: '#CC4300',
-            surface: '#121212',
-            surfaceCard: '#181818',
-            surfaceBorder: '#282828',
-            subText: '#9CA3AF'
+            darkSurface: '#121212',
+            cardBg: '#181818',
+            cardBorder: '#272727'
           },
           fontFamily: {
             teko: ['Teko', 'sans-serif'],
@@ -38,13 +40,12 @@
     * { -webkit-tap-highlight-color: transparent; }
     body {
       padding-top: env(safe-area-inset-top);
-      padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+      padding-bottom: calc(4.8rem + env(safe-area-inset-bottom));
       user-select: none;
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     
-    /* Smooth Bottom Sheet Transitions */
     #detailSheet {
       transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.2s ease-in-out;
     }
@@ -57,101 +58,145 @@
 
   <script src="https://elfsightcdn.com/platform.js" async></script>
 </head>
-<body class="bg-black text-neutral-100 font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-[#0d0d0d] text-neutral-100 font-sans antialiased min-h-screen flex flex-col">
 
-  <header class="sticky top-0 z-30 bg-black/85 backdrop-blur-md border-b border-surfaceBorder px-4 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-xl bg-brand flex items-center justify-center font-teko text-2xl font-bold text-white shadow-lg shadow-brand/20">
-        LR
-      </div>
+  <header class="sticky top-0 z-40 bg-[#0d0d0d]/90 backdrop-blur-md border-b border-cardBorder px-4 py-2.5 flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <img src="live ur ride logo.png" alt="Live Ur Ride Logo" class="w-10 h-10 rounded-full border border-cardBorder bg-black object-contain p-0.5" />
       <div>
-        <h1 class="font-teko text-2xl leading-tight tracking-wider uppercase text-white">Live Ur Ride</h1>
-        <p class="text-[10px] text-brand tracking-widest uppercase font-bold -mt-1">Motorcycle Gear Shop</p>
+        <h1 class="font-teko text-2xl leading-none tracking-wider uppercase text-white">Live Ur Ride</h1>
+        <p class="text-[10px] text-brand tracking-widest uppercase font-bold">Motorcycle Shop</p>
       </div>
     </div>
     
-    <a href="https://instagram.com/liveurridemotorcycleshop" target="_blank" rel="noopener noreferrer" 
-      class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surfaceCard border border-surfaceBorder text-xs font-semibold text-neutral-200 active:scale-95 transition-transform">
-      <svg class="w-3.5 h-3.5 fill-pink-500" viewBox="0 0 24 24">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-      </svg>
-      <span>Follow</span>
-    </a>
-  </header>
-
-  <div id="filterControls" class="sticky top-[57px] z-20 bg-black/95 backdrop-blur-md pb-2 border-b border-surfaceBorder/60">
-    <div class="px-4 pt-2.5 pb-2">
-      <div class="relative">
-        <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search jackets, helmets, luggage..." 
-          class="w-full bg-surfaceCard border border-surfaceBorder rounded-xl pl-10 pr-4 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-brand transition-colors" />
-        <svg class="w-4 h-4 text-neutral-400 absolute left-3.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <circle cx="11" cy="11" r="8" stroke-width="2"></circle>
-          <path stroke-width="2" stroke-linecap="round" d="m21 21-4.35-4.35"></path>
+    <div class="flex items-center gap-2">
+      <a href="tel:+918567967985" class="w-8 h-8 rounded-full bg-cardBg border border-cardBorder flex items-center justify-center text-neutral-300 active:scale-95 transition-transform">
+        <svg class="w-4 h-4 fill-current text-brand" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      </a>
+      <a href="https://instagram.com/liveurridemotorcycleshop" target="_blank" rel="noopener noreferrer" 
+        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cardBg border border-cardBorder text-xs font-semibold text-neutral-200 active:scale-95 transition-transform">
+        <svg class="w-3.5 h-3.5 fill-pink-500" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
         </svg>
-      </div>
+        <span>Feed</span>
+      </a>
     </div>
-    <div class="px-4 flex gap-2 overflow-x-auto no-scrollbar" id="categoryTabs">
-      </div>
-  </div>
+  </header>
 
   <main class="flex-1 w-full max-w-lg mx-auto">
     
-    <section id="shopView" class="p-4">
-      <div id="productGrid" class="grid grid-cols-2 gap-3">
+    <section id="shopView" class="space-y-4">
+      
+      <div class="px-4 pt-3">
+        <div class="relative w-full h-44 rounded-2xl overflow-hidden border border-cardBorder shadow-2xl">
+          <img src="shop.jfif" alt="Live Ur Ride Workshop & Store" class="w-full h-full object-cover brightness-75 scale-105 hover:scale-100 transition-transform duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+          <div class="absolute bottom-3 left-3 right-3 flex justify-between items-end">
+            <div>
+              <span class="bg-brand text-white text-[9px] font-extrabold uppercase px-2 py-0.5 rounded tracking-wider">Flagship Store</span>
+              <h2 class="font-teko text-2xl uppercase tracking-wider text-white mt-1 leading-none">Equip Your Adventure</h2>
+              <p class="text-[11px] text-neutral-300 font-medium">Genuine Riding Gears • Armor • Touring Kits</p>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="px-4 space-y-2.5">
+        <div class="relative">
+          <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search jackets, boots, helmets, luggage..." 
+            class="w-full bg-cardBg border border-cardBorder rounded-xl pl-10 pr-4 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-brand transition-colors" />
+          <svg class="w-4 h-4 text-neutral-400 absolute left-3.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" stroke-width="2"></circle>
+            <path stroke-width="2" stroke-linecap="round" d="m21 21-4.35-4.35"></path>
+          </svg>
+        </div>
+
+        <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="categoryTabs">
+          </div>
+      </div>
+
+      <div class="px-4 pb-4">
+        <div id="productGrid" class="grid grid-cols-2 gap-3">
+          </div>
+      </div>
     </section>
 
     <section id="reelsView" class="p-4 hidden space-y-4">
-      <div class="bg-surfaceCard border border-surfaceBorder rounded-2xl p-4 text-center">
-        <h2 class="font-teko text-2xl uppercase tracking-wider text-brand">Latest Shop Reels & Posts</h2>
-        <p class="text-xs text-neutral-400">Live feed synced with @liveurridemotorcycleshop</p>
+      <div class="bg-cardBg border border-cardBorder rounded-2xl p-4 text-center">
+        <img src="live ur ride logo.png" alt="Live Ur Ride" class="w-12 h-12 mx-auto rounded-full mb-2 border border-brand/50 p-0.5 bg-black" />
+        <h2 class="font-teko text-2xl uppercase tracking-wider text-brand">Live Ur Ride Community</h2>
+        <p class="text-xs text-neutral-400">Watch our latest gear unboxings, reviews & ride logs</p>
+        <a href="https://instagram.com/liveurridemotorcycleshop" target="_blank" rel="noopener noreferrer" 
+          class="inline-block mt-2 text-[11px] text-neutral-300 font-bold underline underline-offset-4">
+          Open @liveurridemotorcycleshop
+        </a>
       </div>
+
       <div class="w-full min-h-[450px]">
         <div class="elfsight-app-f7f7f3fb-fe77-4b29-a628-38c347803f9b" data-elfsight-app-lazy></div>
       </div>
     </section>
 
     <section id="infoView" class="p-4 hidden space-y-3">
-      <div class="bg-surfaceCard border border-surfaceBorder rounded-2xl p-5 space-y-4">
-        <div>
-          <h2 class="font-teko text-3xl uppercase text-white tracking-wide">Live Ur Ride Motorcycle Shop</h2>
-          <p class="text-neutral-400 text-xs leading-relaxed mt-1">Specialty motorcycle riding gear, dry bags, saddles, intercoms, and safety accessories built for tourers, daily riders, and racers.</p>
-        </div>
-        <div class="divide-y divide-surfaceBorder text-xs">
-          <div class="py-2.5 flex justify-between items-center">
-            <span class="text-neutral-400">WhatsApp Dispatch</span>
-            <span class="text-brand font-semibold">+91 98765 43210</span>
-          </div>
-          <div class="py-2.5 flex justify-between items-center">
-            <span class="text-neutral-400">Shipping</span>
-            <span class="text-neutral-200 font-medium">Pan-India Express Service</span>
-          </div>
-          <div class="py-2.5 flex justify-between items-center">
-            <span class="text-neutral-400">Fit & Sizing</span>
-            <span class="text-neutral-200 font-medium">Live Video Assistance</span>
+      <div class="bg-cardBg border border-cardBorder rounded-2xl p-5 space-y-4">
+        <div class="flex items-center gap-3">
+          <img src="live ur ride logo.png" alt="Logo" class="w-14 h-14 rounded-full border border-cardBorder bg-black object-contain p-1" />
+          <div>
+            <h2 class="font-teko text-3xl uppercase text-white leading-tight">Live Ur Ride</h2>
+            <p class="text-brand text-xs font-semibold uppercase tracking-wider">Specialty Motorcycle Shop</p>
           </div>
         </div>
-        <a id="directStoreContact" href="#" target="_blank" 
-          class="w-full bg-brand hover:bg-brandDark text-white py-3 rounded-xl text-center text-xs font-bold block uppercase tracking-wider transition-colors">
-          Contact Store On WhatsApp
-        </a>
+        
+        <p class="text-neutral-300 text-xs leading-relaxed">
+          Premium motorcycle riding protective gear, modular luggage, auxiliary lighting systems, and touring accessories. We test every product for safety and durability before it hits our racks.
+        </p>
+
+        <div class="divide-y divide-cardBorder text-xs pt-1">
+          <div class="py-3 flex justify-between items-center">
+            <span class="text-neutral-400">Call / WhatsApp</span>
+            <a href="tel:+918567967985" class="text-brand font-bold tracking-wide">+91 85679 67985</a>
+          </div>
+          <div class="py-3 flex justify-between items-center">
+            <span class="text-neutral-400">Email Enquiries</span>
+            <a href="mailto:liveurride@gmail.com" class="text-neutral-200 font-medium">liveurride@gmail.com</a>
+          </div>
+          <div class="py-3 flex justify-between items-center">
+            <span class="text-neutral-400">Delivery</span>
+            <span class="text-neutral-200 font-medium">Pan-India Courier Available</span>
+          </div>
+          <div class="py-3 flex justify-between items-center">
+            <span class="text-neutral-400">Fitting Guidance</span>
+            <span class="text-neutral-200 font-medium">Live Video Assistance on WhatsApp</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 pt-2">
+          <a href="https://wa.me/918567967985?text=Hi%20Live%20Ur%20Ride%20team,%20I%20have%20an%20inquiry." target="_blank" 
+            class="bg-brand hover:bg-brandDark text-white py-2.5 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 shadow-lg shadow-brand/20">
+            <span>WhatsApp</span>
+          </a>
+          <a href="tel:+918567967985" 
+            class="bg-neutral-800 hover:bg-neutral-700 border border-cardBorder text-white py-2.5 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5">
+            <span>Call Now</span>
+          </a>
+        </div>
       </div>
     </section>
 
   </main>
 
   <div id="sheetBackdrop" onclick="closeProductModal()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-200"></div>
-  <div id="detailSheet" class="fixed inset-x-0 bottom-0 max-w-lg mx-auto z-50 bg-[#151515] border-t border-surfaceBorder rounded-t-3xl p-5 shadow-2xl closed">
-    <div class="w-12 h-1 bg-neutral-700 rounded-full mx-auto mb-4 cursor-pointer" onclick="closeProductModal()"></div>
+  <div id="detailSheet" class="fixed inset-x-0 bottom-0 max-w-lg mx-auto z-50 bg-[#141414] border-t border-cardBorder rounded-t-3xl p-5 shadow-2xl closed">
+    <div class="w-12 h-1.5 bg-neutral-700 rounded-full mx-auto mb-4 cursor-pointer" onclick="closeProductModal()"></div>
     <div id="sheetContent" class="space-y-4">
       </div>
   </div>
 
-  <nav class="fixed bottom-0 inset-x-0 z-40 bg-black/90 backdrop-blur-md border-t border-surfaceBorder px-4 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+  <nav class="fixed bottom-0 inset-x-0 z-40 bg-[#0d0d0d]/95 backdrop-blur-md border-t border-cardBorder px-6 py-2 pb-[max(0.6rem,env(safe-area-inset-bottom))]">
     <div class="max-w-md mx-auto flex justify-around items-center">
       <button onclick="switchTab('shop')" id="nav-shop" class="flex flex-col items-center text-brand font-bold text-[11px] active:scale-95 transition-all">
         <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-        <span>Shop</span>
+        <span>Gear Shop</span>
       </button>
       <button onclick="switchTab('reels')" id="nav-reels" class="flex flex-col items-center text-neutral-400 font-medium text-[11px] active:scale-95 transition-all">
         <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -159,69 +204,106 @@
       </button>
       <button onclick="switchTab('info')" id="nav-info" class="flex flex-col items-center text-neutral-400 font-medium text-[11px] active:scale-95 transition-all">
         <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/><line x1="12" y1="16" x2="12" y2="12" stroke-width="2"/><line x1="12" y1="8" x2="12.01" y2="8" stroke-width="2"/></svg>
-        <span>Store</span>
+        <span>Store Info</span>
       </button>
     </div>
   </nav>
 
   <script>
     // =========================================================================
-    // STORE CONFIGURATION & INVENTORY MANAGEMENT
-    // Change your WhatsApp number here (country code + number, without '+')
+    // STORE CONFIGURATION
     // =========================================================================
-    const WHATSAPP_PHONE = "919876543210"; 
+    const STORE_PHONE = "+918567967985";
+    const WA_NUMBER = "918567967985"; // No '+' or special symbols for WhatsApp link
+    const STORE_EMAIL = "liveurride@gmail.com";
 
     // Category Tabs displayed at top
-    const CATEGORIES = ["All", "Riding Gears", "Luggage", "Accessories"];
+    const CATEGORIES = ["All", "Jackets", "Pants", "Boots", "Gloves", "Helmets", "Luggage", "Lights"];
 
-    // Add or remove products here anytime:
+    // Uploaded inventory catalog
     const PRODUCTS = [
       {
-        id: "LUR-001",
-        name: "Touring All-Weather Jacket",
-        category: "Riding Gears",
-        price: 6499,
-        badge: "Bestseller",
-        image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80",
-        features: ["CE Level 2 Armor (Shoulders & Elbows)", "Thermal & Waterproof Liners Included", "High-Flow Ventilation Panels"]
+        id: "LUR-JKT-01",
+        name: "Solace All-Weather Mesh Touring Jacket",
+        category: "Jackets",
+        price: 7499,
+        badge: "Armored",
+        image: "jackets.jfif",
+        features: ["CE Level 2 armor at back, shoulder & elbow", "High-density mesh airflow panels", "Includes thermal & waterproof rain liners"]
       },
       {
-        id: "LUR-002",
-        name: "Waterproof Tail Bag 45L",
+        id: "LUR-PNT-01",
+        name: "Solace Cool Breeze Adventure Riding Pants",
+        category: "Pants",
+        price: 6299,
+        badge: "Airflow",
+        image: "coolbreeze.webp",
+        features: ["High-visibility neon contrast panels", "CE approved knee & hip protectors", "Stretch accordion panels for riding posture comfort"]
+      },
+      {
+        id: "LUR-BOT-01",
+        name: "Solace Track & Touring Leather Boots",
+        category: "Boots",
+        price: 8499,
+        badge: "CE Certified",
+        image: "boots.webp",
+        features: ["Replaceable metal toe sliders", "Ankle & heel reinforcement armor", "Anti-slip vulcanized oil-resistant sole"]
+      },
+      {
+        id: "LUR-GLV-01",
+        name: "Solace Furious Full-Gauntlet Racing Gloves",
+        category: "Gloves",
+        price: 3999,
+        badge: "Kangaroo Leather",
+        image: "gloves.webp",
+        features: ["Premium Kangaroo palm for feel & durability", "Carbon knuckle and scaphoid palm sliders", "CE certified Level 1 KP safety standard"]
+      },
+      {
+        id: "LUR-HLM-01",
+        name: "LS2 Dual-Visor Aerodynamic Helmet",
+        category: "Helmets",
+        price: 5799,
+        badge: "ECE Approved",
+        image: "helmets.webp",
+        features: ["Quick-deploy internal drop-down sun visor", "Laser-cut multi-density EPS liner", "Pinlock-ready anti-scratch main visor"]
+      },
+      {
+        id: "LUR-LUG-01",
+        name: "Solace Heavy-Duty Expedition Tail Duffel Bag",
         category: "Luggage",
-        price: 3299,
+        price: 3499,
         badge: "Waterproof",
-        image: "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=600&q=80",
-        features: ["100% Waterproof Heavy-Duty 500D PVC", "Universal Quick-Release Buckles", "Integrated Reflector Strips"]
+        image: "luggage.webp",
+        features: ["100% waterproof 500D PVC roll-top system", "Heavy-duty tie-down straps with universal quick buckles", "MOLLE webbing for extra gear attachment"]
       },
       {
-        id: "LUR-003",
-        name: "Carbon Knuckle Riding Gloves",
-        category: "Riding Gears",
-        price: 2199,
-        badge: "New",
-        image: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=600&q=80",
-        features: ["Real Carbon Knuckle Shields", "Touchscreen Friendly Fingertips", "Reinforced Palm Sliders"]
+        id: "LUR-LUG-02",
+        name: "Solace Multi-Utility Motorcycle Tank Bag",
+        category: "Luggage",
+        price: 2499,
+        badge: "Expandable",
+        image: "luggage.jpg",
+        features: ["Magnetic & strap mounting compatible", "Top transparent touch-sensitive phone pocket", "Includes high-visibility waterproof rain cover"]
       },
       {
-        id: "LUR-004",
-        name: "Anti-Vibration Phone Mount",
-        category: "Accessories",
-        price: 1499,
-        badge: "Hot",
-        image: "https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=600&q=80",
-        features: ["Quad-Spring Vibration Isolation", "CNC Machined Aluminum Frame", "Protects Smartphone OIS Camera Sensors"]
+        id: "LUR-LGT-01",
+        name: "Dual Projector LED Auxiliary Fog Lights (Pair)",
+        category: "Lights",
+        price: 2999,
+        badge: "High Beam",
+        image: "lights.webp",
+        features: ["Dual color output (Amber Fog / White High Beam)", "Solid CNC aluminum housing with protective grille", "IP68 waterproof for extreme wet rides"]
       }
     ];
 
     // =========================================================================
-    // RENDER ENGINE
+    // ENGINE & UI LOGIC
     // =========================================================================
     let selectedCategory = "All";
     let searchQuery = "";
 
     function triggerHaptic() {
-      if ("vibrate" in navigator) navigator.vibrate(12);
+      if ("vibrate" in navigator) navigator.vibrate(10);
     }
 
     function initCategoryTabs() {
@@ -231,7 +313,7 @@
         return `
           <button onclick="setCategory('${cat}')" 
             class="px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap active:scale-95 transition-all ${
-              isActive ? 'bg-brand text-white shadow-md shadow-brand/30' : 'bg-surfaceCard border border-surfaceBorder text-neutral-400'
+              isActive ? 'bg-brand text-white shadow-md shadow-brand/30' : 'bg-cardBg border border-cardBorder text-neutral-400'
             }">
             ${cat}
           </button>
@@ -262,60 +344,77 @@
       if (filtered.length === 0) {
         grid.innerHTML = `
           <div class="col-span-2 text-center py-16 text-neutral-500 text-xs">
-            No products found matching your search.
+            No gear found matching your search.
           </div>
         `;
         return;
       }
 
       grid.innerHTML = filtered.map(p => `
-        <div onclick="openProductModal('${p.id}')" class="bg-surfaceCard border border-surfaceBorder rounded-2xl overflow-hidden flex flex-col justify-between active:scale-[0.98] transition-transform cursor-pointer shadow-lg">
-          <div class="relative aspect-square w-full bg-neutral-900 overflow-hidden">
-            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy" />
+        <div onclick="openProductModal('${p.id}')" class="bg-cardBg border border-cardBorder rounded-2xl overflow-hidden flex flex-col justify-between active:scale-[0.98] transition-transform cursor-pointer shadow-lg">
+          <div class="relative aspect-square w-full bg-neutral-900 overflow-hidden flex items-center justify-center">
+            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain p-2 hover:scale-105 transition-transform" 
+              onerror="this.src='live ur ride logo.png'; this.classList.add('p-6');" loading="lazy" />
             ${p.badge ? `<span class="absolute top-2 left-2 bg-brand text-[9px] font-black uppercase tracking-wider text-white px-2 py-0.5 rounded shadow">${p.badge}</span>` : ''}
           </div>
           <div class="p-3 flex flex-col flex-1 justify-between">
             <div>
-              <span class="text-[9px] uppercase tracking-wider font-semibold text-neutral-400">${p.category}</span>
+              <span class="text-[9px] uppercase tracking-wider font-semibold text-brand">${p.category}</span>
               <h3 class="text-xs font-bold text-white line-clamp-2 mt-0.5 leading-snug">${p.name}</h3>
             </div>
-            <div class="mt-2 flex items-center justify-between">
-              <span class="text-lg font-teko font-bold text-brand leading-none">₹${p.price.toLocaleString('en-IN')}</span>
-              <span class="text-[10px] bg-neutral-800 border border-surfaceBorder text-neutral-300 font-bold px-2 py-1 rounded-lg">View</span>
+            <div class="mt-2.5 flex items-center justify-between">
+              <span class="text-lg font-teko font-bold text-white leading-none">₹${p.price.toLocaleString('en-IN')}</span>
+              <span class="text-[10px] bg-neutral-800 border border-cardBorder text-neutral-200 font-bold px-2 py-1 rounded-lg">Details</span>
             </div>
           </div>
         </div>
       `).join('');
     }
 
-    // Modal Bottom Sheet Logic
+    // Modal Sheet Functionality
     function openProductModal(productId) {
       triggerHaptic();
       const product = PRODUCTS.find(p => p.id === productId);
       if (!product) return;
 
-      const waMsg = encodeURIComponent(`Hi Live Ur Ride, I would like to order: ${product.name} (SKU: ${product.id}) priced at ₹${product.price}.`);
-      const waLink = `https://wa.me/${WHATSAPP_PHONE}?text=${waMsg}`;
+      const waMsg = encodeURIComponent(`Hi Live Ur Ride, I am interested in: ${product.name} (Price: ₹${product.price}). Please share sizing and delivery details.`);
+      const waLink = `https://wa.me/${WA_NUMBER}?text=${waMsg}`;
 
       const content = document.getElementById("sheetContent");
       content.innerHTML = `
         <div class="flex gap-3 items-center">
-          <img src="${product.image}" class="w-20 h-20 rounded-xl object-cover border border-surfaceBorder flex-shrink-0" />
+          <div class="w-20 h-20 bg-neutral-900 rounded-xl border border-cardBorder p-1 flex-shrink-0 flex items-center justify-center">
+            <img src="${product.image}" class="w-full h-full object-contain" onerror="this.src='live ur ride logo.png';" />
+          </div>
           <div>
             <span class="text-[10px] uppercase font-bold text-brand tracking-widest">${product.category}</span>
             <h3 class="text-sm font-bold text-white leading-tight">${product.name}</h3>
-            <p class="font-teko text-2xl font-bold text-white mt-1">₹${product.price.toLocaleString('en-IN')}</p>
+            <p class="font-teko text-2xl font-bold text-brand mt-0.5">₹${product.price.toLocaleString('en-IN')}</p>
           </div>
         </div>
-        <div class="bg-surface border border-surfaceBorder rounded-xl p-3 space-y-1.5">
-          <p class="text-[10px] uppercase font-bold text-neutral-400">Specifications & Highlights</p>
-          ${product.features.map(f => `<div class="flex items-center gap-2 text-xs text-neutral-300"><span class="w-1.5 h-1.5 rounded-full bg-brand"></span><span>${f}</span></div>`).join('')}
+
+        <div class="bg-darkSurface border border-cardBorder rounded-xl p-3 space-y-2">
+          <p class="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">Features & Armour Protection</p>
+          <div class="space-y-1.5">
+            ${product.features.map(f => `
+              <div class="flex items-start gap-2 text-xs text-neutral-300">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></span>
+                <span>${f}</span>
+              </div>
+            `).join('')}
+          </div>
         </div>
-        <a href="${waLink}" target="_blank" rel="noopener noreferrer" 
-          class="w-full bg-brand hover:bg-brandDark text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 tracking-wider uppercase active:scale-95 transition-all">
-          <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.067-2.185-.568-1.574-.672-2.58-2.28-2.658-2.384-.078-.105-.636-.847-.636-1.614 0-.766.402-1.144.545-1.301.144-.157.314-.196.42-.196.105 0 .21.002.302.006.097.005.228-.037.356.27.132.315.45 1.096.49 1.175.039.079.065.171.013.275-.052.105-.078.17-.156.26-.078.092-.165.205-.236.276-.079.079-.161.164-.069.322.092.158.409.674.877 1.09.602.536 1.109.702 1.267.781.157.079.25.066.342-.039.092-.105.394-.46.5-.618.105-.157.21-.131.355-.079.144.053.918.433 1.076.512.157.079.262.118.302.184.039.066.039.38-.105.785z"/></svg>
-          <span>Order via WhatsApp</span>
-        </a>
+
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <a href="${waLink}" target="_blank" rel="noopener noreferrer" 
+            class="bg-brand hover:bg-brandDark text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 tracking-wider uppercase active:scale-95 transition-all shadow-lg shadow-brand/20">
+            <span>Order On WhatsApp</span>
+          </a>
+          <a href="tel:${STORE_PHONE}" 
+            class="bg-neutral-800 hover:bg-neutral-700 border border-cardBorder text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 tracking-wider uppercase active:scale-95 transition-all">
+            <span>Call Shop</span>
+          </a>
+        </div>
       `;
 
       document.getElementById("sheetBackdrop").classList.remove("pointer-events-none", "opacity-0");
@@ -327,7 +426,7 @@
       document.getElementById("detailSheet").classList.add("closed");
     }
 
-    // App Tab Switcher
+    // Tab Navigation Switcher
     function switchTab(tabId) {
       triggerHaptic();
       ['shop', 'reels', 'info'].forEach(id => {
@@ -337,26 +436,16 @@
         nav.classList.add('text-neutral-400', 'font-medium');
       });
 
-      // Toggle search/filters visibility
-      const filterBar = document.getElementById("filterControls");
-      if (tabId === 'shop') {
-        filterBar.classList.remove('hidden');
-      } else {
-        filterBar.classList.add('hidden');
-      }
-
       document.getElementById(tabId + 'View').classList.remove('hidden');
       const activeNav = document.getElementById('nav-' + tabId);
       activeNav.classList.remove('text-neutral-400', 'font-medium');
       activeNav.classList.add('text-brand', 'font-bold');
 
+      // Refresh layout for lazy-loaded Instagram elements
       window.dispatchEvent(new Event('resize'));
     }
 
-    // Set dynamic direct contact link
-    document.getElementById("directStoreContact").href = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent("Hi Live Ur Ride, I want to inquire about motorcycle gears and accessories.")}`;
-
-    // Initialize View
+    // Startup
     initCategoryTabs();
     renderProducts();
   </script>
