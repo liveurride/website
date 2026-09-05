@@ -8,8 +8,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-  <link rel="icon" type="image/png" href="live ur ride logo.png" />
-  <link rel="apple-touch-icon" href="live ur ride logo.png" />
+  <link rel="icon" type="image/png" href="./live%20ur%20ride%20logo.png" />
+  <link rel="apple-touch-icon" href="./live%20ur%20ride%20logo.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +62,10 @@
 
   <header class="sticky top-0 z-40 bg-[#0d0d0d]/90 backdrop-blur-md border-b border-cardBorder px-4 py-2.5 flex items-center justify-between">
     <div class="flex items-center gap-2.5">
-      <img src="live ur ride logo.png" alt="Live Ur Ride Logo" class="w-10 h-10 rounded-full border border-cardBorder bg-black object-contain p-0.5" />
+      <div class="w-10 h-10 rounded-full border border-cardBorder bg-black overflow-hidden flex items-center justify-center">
+        <img src="./live%20ur%20ride%20logo.png" alt="Logo" class="w-full h-full object-contain" 
+          onerror="this.parentElement.innerHTML='<span class=\'font-teko text-xl text-brand font-bold\'>LR</span>'" />
+      </div>
       <div>
         <h1 class="font-teko text-2xl leading-none tracking-wider uppercase text-white">Live Ur Ride</h1>
         <p class="text-[10px] text-brand tracking-widest uppercase font-bold">Motorcycle Shop</p>
@@ -88,8 +91,9 @@
     <section id="shopView" class="space-y-4">
       
       <div class="px-4 pt-3">
-        <div class="relative w-full h-44 rounded-2xl overflow-hidden border border-cardBorder shadow-2xl">
-          <img src="shop.jfif" alt="Live Ur Ride Workshop & Store" class="w-full h-full object-cover brightness-75 scale-105 hover:scale-100 transition-transform duration-500" />
+        <div class="relative w-full h-44 rounded-2xl overflow-hidden border border-cardBorder shadow-2xl bg-neutral-900">
+          <img src="./shop.jfif" alt="Live Ur Ride Workshop" class="w-full h-full object-cover brightness-75 scale-105" 
+            onerror="this.style.display='none'" />
           <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
           <div class="absolute bottom-3 left-3 right-3 flex justify-between items-end">
             <div>
@@ -123,7 +127,10 @@
 
     <section id="reelsView" class="p-4 hidden space-y-4">
       <div class="bg-cardBg border border-cardBorder rounded-2xl p-4 text-center">
-        <img src="live ur ride logo.png" alt="Live Ur Ride" class="w-12 h-12 mx-auto rounded-full mb-2 border border-brand/50 p-0.5 bg-black" />
+        <div class="w-12 h-12 mx-auto rounded-full mb-2 border border-brand/50 overflow-hidden bg-black flex items-center justify-center">
+          <img src="./live%20ur%20ride%20logo.png" alt="Live Ur Ride" class="w-full h-full object-contain" 
+            onerror="this.parentElement.innerHTML='<span class=\'font-teko text-xl text-brand font-bold\'>LR</span>'" />
+        </div>
         <h2 class="font-teko text-2xl uppercase tracking-wider text-brand">Live Ur Ride Community</h2>
         <p class="text-xs text-neutral-400">Watch our latest gear unboxings, reviews & ride logs</p>
         <a href="https://instagram.com/liveurridemotorcycleshop" target="_blank" rel="noopener noreferrer" 
@@ -140,7 +147,10 @@
     <section id="infoView" class="p-4 hidden space-y-3">
       <div class="bg-cardBg border border-cardBorder rounded-2xl p-5 space-y-4">
         <div class="flex items-center gap-3">
-          <img src="live ur ride logo.png" alt="Logo" class="w-14 h-14 rounded-full border border-cardBorder bg-black object-contain p-1" />
+          <div class="w-14 h-14 rounded-full border border-cardBorder bg-black overflow-hidden flex items-center justify-center">
+            <img src="./live%20ur%20ride%20logo.png" alt="Logo" class="w-full h-full object-contain" 
+              onerror="this.parentElement.innerHTML='<span class=\'font-teko text-2xl text-brand font-bold\'>LR</span>'" />
+          </div>
           <div>
             <h2 class="font-teko text-3xl uppercase text-white leading-tight">Live Ur Ride</h2>
             <p class="text-brand text-xs font-semibold uppercase tracking-wider">Specialty Motorcycle Shop</p>
@@ -148,7 +158,7 @@
         </div>
         
         <p class="text-neutral-300 text-xs leading-relaxed">
-          Premium motorcycle riding protective gear, modular luggage, auxiliary lighting systems, and touring accessories. We test every product for safety and durability before it hits our racks.
+          Premium motorcycle riding protective gear, modular luggage, auxiliary lighting systems, and touring accessories.
         </p>
 
         <div class="divide-y divide-cardBorder text-xs pt-1">
@@ -162,16 +172,16 @@
           </div>
           <div class="py-3 flex justify-between items-center">
             <span class="text-neutral-400">Delivery</span>
-            <span class="text-neutral-200 font-medium">Pan-India Courier Available</span>
+            <span class="text-neutral-200 font-medium">Pan-India Express Service</span>
           </div>
           <div class="py-3 flex justify-between items-center">
             <span class="text-neutral-400">Fitting Guidance</span>
-            <span class="text-neutral-200 font-medium">Live Video Assistance on WhatsApp</span>
+            <span class="text-neutral-200 font-medium">WhatsApp Video Assistance</span>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-2 pt-2">
-          <a href="https://wa.me/918567967985?text=Hi%20Live%20Ur%20Ride%20team,%20I%20have%20an%20inquiry." target="_blank" 
+          <a href="https://wa.me/918567967985?text=Hi%20Live%20Ur%20Ride,%20I%20have%20an%20inquiry." target="_blank" 
             class="bg-brand hover:bg-brandDark text-white py-2.5 rounded-xl text-center text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 shadow-lg shadow-brand/20">
             <span>WhatsApp</span>
           </a>
@@ -188,8 +198,7 @@
   <div id="sheetBackdrop" onclick="closeProductModal()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-200"></div>
   <div id="detailSheet" class="fixed inset-x-0 bottom-0 max-w-lg mx-auto z-50 bg-[#141414] border-t border-cardBorder rounded-t-3xl p-5 shadow-2xl closed">
     <div class="w-12 h-1.5 bg-neutral-700 rounded-full mx-auto mb-4 cursor-pointer" onclick="closeProductModal()"></div>
-    <div id="sheetContent" class="space-y-4">
-      </div>
+    <div id="sheetContent" class="space-y-4"></div>
   </div>
 
   <nav class="fixed bottom-0 inset-x-0 z-40 bg-[#0d0d0d]/95 backdrop-blur-md border-t border-cardBorder px-6 py-2 pb-[max(0.6rem,env(safe-area-inset-bottom))]">
@@ -210,17 +219,12 @@
   </nav>
 
   <script>
-    // =========================================================================
-    // STORE CONFIGURATION
-    // =========================================================================
     const STORE_PHONE = "+918567967985";
-    const WA_NUMBER = "918567967985"; // No '+' or special symbols for WhatsApp link
-    const STORE_EMAIL = "liveurride@gmail.com";
+    const WA_NUMBER = "918567967985";
 
-    // Category Tabs displayed at top
     const CATEGORIES = ["All", "Jackets", "Pants", "Boots", "Gloves", "Helmets", "Luggage", "Lights"];
 
-    // Uploaded inventory catalog
+    // Products list using relative paths (./filename)
     const PRODUCTS = [
       {
         id: "LUR-JKT-01",
@@ -228,7 +232,7 @@
         category: "Jackets",
         price: 7499,
         badge: "Armored",
-        image: "jackets.jfif",
+        image: "./jackets.jfif",
         features: ["CE Level 2 armor at back, shoulder & elbow", "High-density mesh airflow panels", "Includes thermal & waterproof rain liners"]
       },
       {
@@ -237,7 +241,7 @@
         category: "Pants",
         price: 6299,
         badge: "Airflow",
-        image: "coolbreeze.webp",
+        image: "./coolbreeze.webp",
         features: ["High-visibility neon contrast panels", "CE approved knee & hip protectors", "Stretch accordion panels for riding posture comfort"]
       },
       {
@@ -246,7 +250,7 @@
         category: "Boots",
         price: 8499,
         badge: "CE Certified",
-        image: "boots.webp",
+        image: "./boots.webp",
         features: ["Replaceable metal toe sliders", "Ankle & heel reinforcement armor", "Anti-slip vulcanized oil-resistant sole"]
       },
       {
@@ -255,7 +259,7 @@
         category: "Gloves",
         price: 3999,
         badge: "Kangaroo Leather",
-        image: "gloves.webp",
+        image: "./gloves.webp",
         features: ["Premium Kangaroo palm for feel & durability", "Carbon knuckle and scaphoid palm sliders", "CE certified Level 1 KP safety standard"]
       },
       {
@@ -264,7 +268,7 @@
         category: "Helmets",
         price: 5799,
         badge: "ECE Approved",
-        image: "helmets.webp",
+        image: "./helmets.webp",
         features: ["Quick-deploy internal drop-down sun visor", "Laser-cut multi-density EPS liner", "Pinlock-ready anti-scratch main visor"]
       },
       {
@@ -273,7 +277,7 @@
         category: "Luggage",
         price: 3499,
         badge: "Waterproof",
-        image: "luggage.webp",
+        image: "./luggage.webp",
         features: ["100% waterproof 500D PVC roll-top system", "Heavy-duty tie-down straps with universal quick buckles", "MOLLE webbing for extra gear attachment"]
       },
       {
@@ -282,7 +286,7 @@
         category: "Luggage",
         price: 2499,
         badge: "Expandable",
-        image: "luggage.jpg",
+        image: "./luggage.jpg",
         features: ["Magnetic & strap mounting compatible", "Top transparent touch-sensitive phone pocket", "Includes high-visibility waterproof rain cover"]
       },
       {
@@ -291,14 +295,11 @@
         category: "Lights",
         price: 2999,
         badge: "High Beam",
-        image: "lights.webp",
+        image: "./lights.webp",
         features: ["Dual color output (Amber Fog / White High Beam)", "Solid CNC aluminum housing with protective grille", "IP68 waterproof for extreme wet rides"]
       }
     ];
 
-    // =========================================================================
-    // ENGINE & UI LOGIC
-    // =========================================================================
     let selectedCategory = "All";
     let searchQuery = "";
 
@@ -354,7 +355,7 @@
         <div onclick="openProductModal('${p.id}')" class="bg-cardBg border border-cardBorder rounded-2xl overflow-hidden flex flex-col justify-between active:scale-[0.98] transition-transform cursor-pointer shadow-lg">
           <div class="relative aspect-square w-full bg-neutral-900 overflow-hidden flex items-center justify-center">
             <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain p-2 hover:scale-105 transition-transform" 
-              onerror="this.src='live ur ride logo.png'; this.classList.add('p-6');" loading="lazy" />
+              onerror="this.src='./live%20ur%20ride%20logo.png'; this.classList.add('p-6');" loading="lazy" />
             ${p.badge ? `<span class="absolute top-2 left-2 bg-brand text-[9px] font-black uppercase tracking-wider text-white px-2 py-0.5 rounded shadow">${p.badge}</span>` : ''}
           </div>
           <div class="p-3 flex flex-col flex-1 justify-between">
@@ -371,7 +372,6 @@
       `).join('');
     }
 
-    // Modal Sheet Functionality
     function openProductModal(productId) {
       triggerHaptic();
       const product = PRODUCTS.find(p => p.id === productId);
@@ -384,7 +384,7 @@
       content.innerHTML = `
         <div class="flex gap-3 items-center">
           <div class="w-20 h-20 bg-neutral-900 rounded-xl border border-cardBorder p-1 flex-shrink-0 flex items-center justify-center">
-            <img src="${product.image}" class="w-full h-full object-contain" onerror="this.src='live ur ride logo.png';" />
+            <img src="${product.image}" class="w-full h-full object-contain" onerror="this.src='./live%20ur%20ride%20logo.png';" />
           </div>
           <div>
             <span class="text-[10px] uppercase font-bold text-brand tracking-widest">${product.category}</span>
@@ -426,7 +426,6 @@
       document.getElementById("detailSheet").classList.add("closed");
     }
 
-    // Tab Navigation Switcher
     function switchTab(tabId) {
       triggerHaptic();
       ['shop', 'reels', 'info'].forEach(id => {
@@ -441,11 +440,9 @@
       activeNav.classList.remove('text-neutral-400', 'font-medium');
       activeNav.classList.add('text-brand', 'font-bold');
 
-      // Refresh layout for lazy-loaded Instagram elements
       window.dispatchEvent(new Event('resize'));
     }
 
-    // Startup
     initCategoryTabs();
     renderProducts();
   </script>
